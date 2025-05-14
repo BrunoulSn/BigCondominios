@@ -23,25 +23,25 @@ public class BlogAppController {
 
     //Lista Todos os Posts
     @GetMapping(value = "/posts")
-    public ResponseEntity<List<BlogAppPostModel>> getAllPosts(){
+    public ResponseEntity<List<BlogAppPostModel>> getAllPosts() {
         List<BlogAppPostModel> posts = blogAppPostService.findAll();
-        if(posts.isEmpty()){
+        if (posts.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(posts);
         }
         return ResponseEntity.status(HttpStatus.OK).body(posts);
     }
 
-    @GetMapping(value= "/posts/{id}")
-    public ResponseEntity<Object> getPostDetails(@PathVariable long id){
+    @GetMapping(value = "/posts/{id}")
+    public ResponseEntity<Object> getPostDetails(@PathVariable long id) {
         Optional<BlogAppPostModel> blogAppPostModelOptional = blogAppPostService.findById(id);
-        if (!blogAppPostModelOptional.isPresent()){
+        if (!blogAppPostModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("blog not found");
         }
         return ResponseEntity.status(HttpStatus.OK).body(blogAppPostModelOptional.get());
     }
 
     @PostMapping(value = "/newpost")
-    public ResponseEntity<Object> saveNewPost(@RequestBody @Valid BlogAppRecordDto blogAppDto){
+    public ResponseEntity<Object> saveNewPost(@RequestBody @Valid BlogAppRecordDto blogAppDto) {
         var postModel = new BlogAppPostModel();
         BeanUtils.copyProperties(blogAppDto, postModel);
         postModel.setData(LocalDate.now(ZoneId.of("UTC")));
@@ -49,13 +49,28 @@ public class BlogAppController {
     }
 
     @DeleteMapping("/posts/{id}")
-            public ResponseEntity<Object> deletePost (@PathVariable(value = "id") long id){
+    public ResponseEntity<Object> deletePost(@PathVariable(value = "id") long id) {
         Optional<BlogAppPostModel> blogAppPostModelOptional = blogAppPostService.findById(id);
-        if(!blogAppPostModelOptional.isPresent()){
+        if (!blogAppPostModelOptional.isPresent()) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("blog not found");
         }
         blogAppPostService.delete(blogAppPostModelOptional.get());
         return ResponseEntity.status(HttpStatus.OK).body("blog deleted successfully");
     }
 
+    @PutMapping("/posts/{id}")
+    public ResponseEntity<Object> editarPost(@PathVariable Long id, @RequestBody BlogAppRecordDto postAtualizado) {
+        Optional<BlogAppPostModel> optionalPost = blogAppPostService.findById(id);
+        if (optionalPost.isPresent()) {
+            var post = optionalPost.get();
+            post.setTitulo(postAtualizado.titulo());
+            post.setTexto(postAtualizado.texto());
+            post.setAutor(postAtualizado.autor());
+            return ResponseEntity.ok(blogAppPostService.save(post));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("blog not found");
+        }
+
+
+    }
 }
