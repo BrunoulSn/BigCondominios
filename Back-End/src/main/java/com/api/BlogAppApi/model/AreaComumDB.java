@@ -1,0 +1,61 @@
+package com.api.BlogAppApi.model;
+
+import jakarta.persistence.*;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.api.BlogAppApi.utils.Reserva;
+
+@Entity 
+@Table(name = "area_comum")
+public class AreaComumDB implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1l;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(nullable = false, length = 70)
+
+    private String nome;
+    @Column(nullable = false)
+
+    private boolean disponivel;
+    @Column(nullable = false)
+
+    @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reserva> reservas = new ArrayList<>();
+
+    public AreaComumDB(String nome) {
+        this.nome = nome;
+        this.disponivel = true;
+        this.reservas = new ArrayList<>();
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;   
+    }
+
+    public boolean isDisponivel() {
+        return disponivel;
+    }
+
+    public void setDisponivel(boolean disponivel) {
+        this.disponivel = disponivel;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+}
