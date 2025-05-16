@@ -146,4 +146,5 @@ public class MultaDB {
         public void setComprovantePagamento(String comprovantePagamento) {
             this.comprovantePagamento = comprovantePagamento;
         }
+    }
 }
