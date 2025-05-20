@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BIGCONDOMÍNIOS - Cadastro</title>
+    <link rel="stylesheet" href="./styles/cadastroStyle.css" />
+
+</head>
+
+<body>
+    <div class="cadastro-container">
+        <div class="cadastro-box">
+            <img src="predio.png" alt="Imagem de Prédio" class="top-image" />
+            <h1>Cadastro</h1>
+            <form onsubmit="return redirecionar(event)">
+                <input type="text" placeholder="Nome completo" required />
+                <input type="email" placeholder="Digite seu email" required />
+                <input type="text" placeholder="Apartamento" required />
+                <input type="tel" placeholder="Telefone" required />
+                <input type="password" placeholder="Crie uma senha" required />
+                <button type="submit" class="cadastro-button">Cadastrar</button>
+            </form>
+            <p class="login-redirect">Já possui conta? <a href="login.html">Acesse aqui</a></p>
+        </div>
+    </div>
+
+    <script>
+    function redirecionar(event) {
+        event.preventDefault(); // impede o envio padrão
+        // validar os dados ou simular login
+        window.location.href = "login.html"; // redireciona
+        return false;
+    }
+    </script>
+</body>
+
+</html>
