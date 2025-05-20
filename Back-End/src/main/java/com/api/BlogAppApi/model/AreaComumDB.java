@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.api.BlogAppApi.utils.Reserva;
 
-@Entity 
+@Entity
 @Table(name = "area_comum")
 public class areaComumDB implements Serializable {
     @Serial
@@ -40,7 +40,7 @@ public class areaComumDB implements Serializable {
     }
 
     public void setNome(String nome) {
-        this.nome = nome;   
+        this.nome = nome;
     }
 
     public boolean isDisponivel() {

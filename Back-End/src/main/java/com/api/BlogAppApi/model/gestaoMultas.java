@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class gestaoMultas {
     private List<multaDB> multas;
@@ -39,7 +40,7 @@ public class gestaoMultas {
                 .collect(Collectors.toList());
     }
 
-    public void registrarPagamentoMulta(String multaId, String comprovante) {
+    public void registrarPagamentoMulta(long multaId, String comprovante) {
         multaDB multa = buscarMultaPorId(multaId);
         if (multa != null && "PENDENTE".equals(multa.getStatus())) {
             multa.pagarMulta(comprovante);
@@ -48,7 +49,7 @@ public class gestaoMultas {
         }
     }
 
-    public void contestarMulta(String multaId, String motivo) {
+    public void contestarMulta(long multaId, String motivo) {
         multaDB multa = buscarMultaPorId(multaId);
         if (multa != null && "PENDENTE".equals(multa.getStatus())) {
             multa.contestarMulta(motivo);
@@ -58,7 +59,8 @@ public class gestaoMultas {
     }
 
     public void cancelarMulta(String multaId, String motivo) {
-        multaDB multa = buscarMultaPorId(multaId);
+        Long id = Long.parseLong(multaId);
+        multaDB multa = buscarMultaPorId(id);
         if (multa != null && !"PAGA".equals(multa.getStatus())) {
             multa.cancelarMulta(motivo);
         } else {
@@ -74,12 +76,13 @@ public class gestaoMultas {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    private multaDB buscarMultaPorId(String id) {
+    private multaDB buscarMultaPorId(long id) {
         return multas.stream()
-                .filter(m -> m.getId().equals(id))
+                .filter(m -> Objects.equals(m.getId(), id))
                 .findFirst()
                 .orElse(null);
     }
+
 
     public boolean possuiMultasPendentes(moradorDB moradorInadimplente) {
         return multas.stream()
