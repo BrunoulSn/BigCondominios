@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class MultaDB {
+public class multaDB {
     @Entity
     @Table(name = "multa") // você pode ajustar o nome conforme desejar
     public class Multa {
