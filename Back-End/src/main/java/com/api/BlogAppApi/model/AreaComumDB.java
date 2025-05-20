@@ -11,7 +11,7 @@ import com.api.BlogAppApi.utils.Reserva;
 
 @Entity 
 @Table(name = "area_comum")
-public class AreaComumDB implements Serializable {
+public class areaComumDB implements Serializable {
     @Serial
     private static final long serialVersionUID = 1l;
 
@@ -29,7 +29,7 @@ public class AreaComumDB implements Serializable {
     @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reserva> reservas = new ArrayList<>();
 
-    public AreaComumDB(String nome) {
+    public areaComumDB(String nome) {
         this.nome = nome;
         this.disponivel = true;
         this.reservas = new ArrayList<>();

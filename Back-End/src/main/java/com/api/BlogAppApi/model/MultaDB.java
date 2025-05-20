@@ -5,12 +5,13 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "multa") // você pode ajustar o nome conforme desejar
+
 public class multaDB {
-    @Entity
-    @Table(name = "multa") // você pode ajustar o nome conforme desejar
-    public class Multa {
 
         @Id
+
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
 
@@ -50,6 +51,22 @@ public class multaDB {
 
         @Column(length = 255)
         private String comprovantePagamento;
+
+        public void pagarMulta(String comprovante) {
+            this.status = "PAGA";
+            this.dataPagamento = LocalDateTime.now();
+            this.comprovantePagamento = comprovante;
+        }
+
+        public void contestarMulta(String motivo) {
+            this.status = "CONTESTADA";
+            this.observacoes = motivo;
+        }
+
+        public void cancelarMulta(String motivo) {
+            this.status = "CANCELADA";
+            this.observacoes = motivo;
+        }
 
         public Morador getMorador() {
             return morador;
@@ -147,4 +164,3 @@ public class multaDB {
             this.comprovantePagamento = comprovantePagamento;
         }
     }
-}

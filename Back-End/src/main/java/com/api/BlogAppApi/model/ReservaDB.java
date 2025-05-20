@@ -17,7 +17,7 @@ public class reservaDB {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "area_id")
-    private AreaComumDB area;
+    private areaComumDB area;
 
     @Column(name = "data_hora_inicio", nullable = false)
     private LocalDateTime dataHoraInicio;
@@ -32,7 +32,7 @@ public class reservaDB {
         this.status = "AGENDADA";
     }
 
-    public reservaDB(String id, moradorDB morador, AreaComumDB area, LocalDateTime inicio, LocalDateTime fim) {
+    public reservaDB(String id, moradorDB morador, areaComumDB area, LocalDateTime inicio, LocalDateTime fim) {
         this.id = id;
         this.morador = morador;
         this.area = area;
@@ -59,11 +59,11 @@ public class reservaDB {
         this.morador = morador;
     }
 
-    public AreaComumDB getArea() {
+    public areaComumDB getArea() {
         return area;
     }
 
-    public void setArea(AreaComumDB area) {
+    public void setArea(areaComumDB area) {
         this.area = area;
     }
 
