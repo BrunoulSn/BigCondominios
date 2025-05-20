@@ -19,7 +19,7 @@ public class visitaDB {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "morador_id")
-    private Morador moradorResponsavel;
+    private moradorDB moradorResponsavel;
 
     @Column
     private LocalDateTime dataHoraEntrada;
@@ -34,7 +34,7 @@ public class visitaDB {
         this.status = "AGENDADA";
     }
 
-    public visitaDB(String id, String nomeVisitante, String documento, Morador moradorResponsavel) {
+    public visitaDB(String id, String nomeVisitante, String documento, moradorDB moradorResponsavel) {
         this.id = id;
         this.nomeVisitante = nomeVisitante;
         this.documento = documento;
@@ -78,11 +78,11 @@ public class visitaDB {
         this.documento = documento;
     }
 
-    public Morador getMoradorResponsavel() {
+    public moradorDB getMoradorResponsavel() {
         return moradorResponsavel;
     }
 
-    public void setMoradorResponsavel(Morador moradorResponsavel) {
+    public void setMoradorResponsavel(moradorDB moradorResponsavel) {
         this.moradorResponsavel = moradorResponsavel;
     }
 

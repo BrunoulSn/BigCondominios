@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reserva")
-public class ReservaDB {
+public class reservaDB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID) // ou IDENTITY se for usar Long
@@ -13,7 +13,7 @@ public class ReservaDB {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "morador_id")
-    private Morador morador;
+    private moradorDB morador;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "area_id")
@@ -28,11 +28,11 @@ public class ReservaDB {
     @Column(nullable = false, length = 20)
     private String status;
 
-    public Reserva() {
+    public reservaDB() {
         this.status = "AGENDADA";
     }
 
-    public Reserva(String id, Morador morador, AreaComumDB area, LocalDateTime inicio, LocalDateTime fim) {
+    public reservaDB(String id, moradorDB morador, AreaComumDB area, LocalDateTime inicio, LocalDateTime fim) {
         this.id = id;
         this.morador = morador;
         this.area = area;
@@ -51,11 +51,11 @@ public class ReservaDB {
         this.id = id;
     }
 
-    public Morador getMorador() {
+    public moradorDB getMorador() {
         return morador;
     }
 
-    public void setMorador(Morador morador) {
+    public void setMorador(moradorDB morador) {
         this.morador = morador;
     }
 
