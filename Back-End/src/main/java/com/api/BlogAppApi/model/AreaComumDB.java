@@ -16,7 +16,7 @@ public class areaComumDB implements Serializable {
     private static final long serialVersionUID = 1l;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, length = 70)
 
@@ -27,7 +27,7 @@ public class areaComumDB implements Serializable {
     @Column(nullable = false)
 
     @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Reserva> reservas = new ArrayList<>();
+    private List<reservaDB> reservas = new ArrayList<>();
 
     public areaComumDB(String nome) {
         this.nome = nome;
@@ -51,11 +51,11 @@ public class areaComumDB implements Serializable {
         this.disponivel = disponivel;
     }
 
-    public List<Reserva> getReservas() {
+    public List<reservaDB> getReservas() {
         return reservas;
     }
 
-    public void setReservas(List<Reserva> reservas) {
+    public void setReservas(List<reservaDB> reservas) {
         this.reservas = reservas;
     }
 }

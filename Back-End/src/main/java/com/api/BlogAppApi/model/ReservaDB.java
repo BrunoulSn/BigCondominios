@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 public class reservaDB {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID) // ou IDENTITY se for usar Long
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "morador_id")
@@ -32,7 +32,7 @@ public class reservaDB {
         this.status = "AGENDADA";
     }
 
-    public reservaDB(String id, moradorDB morador, areaComumDB area, LocalDateTime inicio, LocalDateTime fim) {
+    public reservaDB(Long id, moradorDB morador, areaComumDB area, LocalDateTime inicio, LocalDateTime fim) {
         this.id = id;
         this.morador = morador;
         this.area = area;
@@ -43,11 +43,11 @@ public class reservaDB {
 
     // Getters e Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

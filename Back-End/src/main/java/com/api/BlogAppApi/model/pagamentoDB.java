@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
 public class pagamentoDB {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "morador_id", nullable = false)
@@ -31,7 +32,7 @@ public class pagamentoDB {
         // Construtor padrão exigido pelo JPA
     }
 
-    public pagamentoDB(String id, moradorDB morador, BigDecimal valor, String tipo) {
+    public pagamentoDB(Long id, moradorDB morador, BigDecimal valor, String tipo) {
         this.id = id;
         this.morador = morador;
         this.valor = valor;
@@ -47,11 +48,11 @@ public class pagamentoDB {
 
     // Getters e Setters...
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

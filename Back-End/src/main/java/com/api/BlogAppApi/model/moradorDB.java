@@ -9,8 +9,8 @@ import java.util.List;
 public class moradorDB {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false, length = 100)
     private String nome;
@@ -24,7 +24,7 @@ public class moradorDB {
     @Column(nullable = false, length = 100)
     private String email;
 
-    @OneToMany(mappedBy = "morador", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "moradorResponsavel", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<visitaDB> historicoVisitas = new ArrayList<>();
 
     @OneToMany(mappedBy = "morador", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -32,7 +32,7 @@ public class moradorDB {
 
     public moradorDB() {}
 
-    public moradorDB(String id, String nome, String apartamento, String telefone, String email) {
+    public moradorDB(Long id, String nome, String apartamento, String telefone, String email) {
         this.id = id;
         this.nome = nome;
         this.apartamento = apartamento;
@@ -42,11 +42,11 @@ public class moradorDB {
 
     // Getters e Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

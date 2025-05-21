@@ -1,6 +1,5 @@
 package com.api.BlogAppApi.model;
 
-import com.api.BlogAppApi.utils.Morador;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,11 +11,11 @@ public class multaDB {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "morador_id")
-    private Morador morador;
+    private moradorDB morador;
 
     @Column(nullable = false, length = 255)
     private String descricao;
@@ -67,11 +66,11 @@ public class multaDB {
         this.observacoes = motivo;
     }
 
-    public Morador getMorador() {
+    public moradorDB getMorador() {
         return morador;
     }
 
-    public void setMorador(Morador morador) {
+    public void setMorador(moradorDB morador) {
         this.morador = morador;
     }
 
@@ -79,11 +78,11 @@ public class multaDB {
         return descricao;
     }
 
-    public long getId(){
+    public Long getId(){
         return id;
     }
 
-    public void setId(long id){
+    public void setId(Long id){
         this.id = id;
     }
 

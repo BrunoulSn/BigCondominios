@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 public class visitaDB {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID) // ou IDENTITY se preferir numérico
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(nullable = false, length = 100)
     private String nomeVisitante;
@@ -34,7 +34,7 @@ public class visitaDB {
         this.status = "AGENDADA";
     }
 
-    public visitaDB(String id, String nomeVisitante, String documento, moradorDB moradorResponsavel) {
+    public visitaDB(Long id, String nomeVisitante, String documento, moradorDB moradorResponsavel) {
         this.id = id;
         this.nomeVisitante = nomeVisitante;
         this.documento = documento;
@@ -54,11 +54,11 @@ public class visitaDB {
 
     // Getters e Setters
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
