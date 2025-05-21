@@ -19,76 +19,73 @@ header {
     margin-top: -6px;
     display: flex;
     align-items: center;
-    background-color: #2727f0;
+    background-color: #4b6cff;
+    padding: 20px;
+
 }
 
-#title{
-    margin-right: 860px;
-    margin-left: 10px;
-    font-size: larger;
+.divLogoTexto {
+    max-height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
-.logoApp {
-    margin-left: 40px;
-    width: 200px;
-}
-
-.logoApp img {
-
-    width: 50px;
-    height: 10%;
-    border-radius: 30%;
+.divLogoTexto *{
+    margin-left: 5px;
+    margin-left: 5px;
 }
 
 .contaMorador {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: fit-content;
+    max-width: 200px;
     cursor: pointer;
-    margin-left: 15%;
 }
 
 .contaMorador img {
-    margin-top: 20%;
-    width: 80%;
-    height: 60px;
-    border-radius: 100%;
+    width: 20%;
+    border-radius: 50%;
 }
 
 .contaMorador p {
     margin: 0;
     font-size: 12px;
-    margin-top: 5px;
-    width: 100%;
-    margin-bottom: 20%;
 }
 
 a {
     width: fit-content;
 }
 
-.opcoesUsuario{
+.opcoesUsuario {
     display: flex;
     width: 100%;
     gap: 20px;
     justify-content: center;
-    background-color:  #1bbbdf;
+    flex-wrap: wrap;
 }
+
 .opcaoClicavel {
+    transition: 0.3s;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    background-color: #1bbbdf;
     margin: 5px;
     padding: 4px;
     font-size: 1em;
+    border-radius: 10px;
+}
+
+.opcaoClicavel:hover {
+    transition: 0.3s;
+    background-color: #4787ff;
 }
 
 .opcaoClicavel svg {
     width: 30px;
 }
+
 .opcaoClicavel p {
     margin: 0;
 }
