@@ -2,7 +2,6 @@ package com.api.BlogAppApi.utils;
 
 import com.api.BlogAppApi.model.BlogAppPostModel;
 import com.api.BlogAppApi.repository.BlogAppPostRepository;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

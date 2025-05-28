@@ -1,25 +1,32 @@
-package com.api.BlogAppApi.model;
+
+package com.api.BlogAppApi.GestaoCondominio;
+
+import com.api.BlogAppApi.model.AreaComumDB;
+import com.api.BlogAppApi.model.ReservaDB;
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class gestaoReserva {
-    private List<reservaDB> reservas = new ArrayList<>();
-    private List<areaComumDB> areasComuns = new ArrayList<>();
+    private List<ReservaDB> reservas = new ArrayList<>();
+    private List<AreaComumDB> areasComuns = new ArrayList<>();
 
-    public void adicionarAreaComum(areaComumDB area) {
+    public void adicionarAreaComum(AreaComumDB area) {
         areasComuns.add(area);
     }
 
-    public List<areaComumDB> listarAreasDisponiveisParaData(LocalDateTime data) {
+    public List<AreaComumDB> listarAreasDisponiveisParaData(LocalDateTime data) {
         return areasComuns.stream()
                 .filter(area -> isAreaDisponivel(area, data))
                 .collect(Collectors.toList());
     }
 
     public void cancelarReserva(String reservaId) {
-        reservaDB reserva = reservas.stream()
+        ReservaDB reserva = reservas.stream()
                 .filter(r -> r.getId().equals(reservaId))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Reserva não encontrada"));
@@ -31,7 +38,7 @@ public class gestaoReserva {
         reserva.setStatus("CANCELADA");
     }
 
-    public List<reservaDB> listarReservasFuturas() {
+    public List<ReservaDB> listarReservasFuturas() {
         LocalDateTime agora = LocalDateTime.now();
         return reservas.stream()
                 .filter(r -> r.getDataHoraInicio().isAfter(agora))
@@ -39,25 +46,25 @@ public class gestaoReserva {
                 .collect(Collectors.toList());
     }
 
-    public List<areaComumDB> listarTodasAreas() {
+    public List<AreaComumDB> listarTodasAreas() {
         return new ArrayList<>(areasComuns);
     }
 
-    private boolean isAreaDisponivel(areaComumDB area, LocalDateTime data) {
+    private boolean isAreaDisponivel(AreaComumDB area, LocalDateTime data) {
         return reservas.stream()
                 .filter(r -> r.getArea().equals(area))
                 .filter(r -> !"CANCELADA".equals(r.getStatus()))
                 .noneMatch(r -> verificaConflitoDeDatas(r, data));
     }
 
-    private boolean verificaConflitoDeDatas(reservaDB reserva, LocalDateTime data) {
+    private boolean verificaConflitoDeDatas(ReservaDB reserva, LocalDateTime data) {
         LocalDateTime inicio = data;
         LocalDateTime fim = data.plusHours(4); // Assumindo reserva padrão de 4 horas
         return !(fim.isBefore(reserva.getDataHoraInicio()) ||
                 inicio.isAfter(reserva.getDataHoraFim()));
     }
 
-    public void fazerReserva(reservaDB reserva1) {
+    public void fazerReserva(ReservaDB reserva1) {
         reservas.add(reserva1);
     }
 }

@@ -28,7 +28,7 @@ public class moradorDB {
     private List<visitaDB> historicoVisitas = new ArrayList<>();
 
     @OneToMany(mappedBy = "morador", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<multaDB> multas = new ArrayList<>();
+    private List<MultaDB> multas = new ArrayList<>();
 
     public moradorDB() {}
 
@@ -90,11 +90,11 @@ public class moradorDB {
         this.historicoVisitas = historicoVisitas;
     }
 
-    public List<multaDB> getMultas() {
+    public List<MultaDB> getMultas() {
         return multas;
     }
 
-    public void setMultas(List<multaDB> multas) {
+    public void setMultas(List<MultaDB> multas) {
         this.multas = multas;
     }
 }

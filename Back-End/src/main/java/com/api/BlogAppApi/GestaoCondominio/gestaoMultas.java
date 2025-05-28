@@ -1,4 +1,9 @@
-package com.api.BlogAppApi.model;
+
+package com.api.BlogAppApi.GestaoCondominio;
+
+import com.api.BlogAppApi.model.moradorDB;
+import com.api.BlogAppApi.model.MultaDB;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -7,33 +12,34 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.Objects;
 
+@Service
 public class gestaoMultas {
-    private List<multaDB> multas;
+    private List<MultaDB> multas;
 
     public gestaoMultas() {
         this.multas = new ArrayList<>();
     }
 
-    public void aplicarMulta(multaDB multa) {
+    public void aplicarMulta(MultaDB multa) {
         if (multa.getValor().compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("Valor da multa deve ser maior que zero");
         }
         multas.add(multa);
     }
 
-    public List<multaDB> listarMultasPorMorador(moradorDB morador) {
+    public List<MultaDB> listarMultasPorMorador(moradorDB morador) {
         return multas.stream()
                 .filter(m -> m.getMorador().equals(morador))
                 .collect(Collectors.toList());
     }
 
-    public List<multaDB> listarMultasPendentes() {
+    public List<MultaDB> listarMultasPendentes() {
         return multas.stream()
                 .filter(m -> "PENDENTE".equals(m.getStatus()))
                 .collect(Collectors.toList());
     }
 
-    public List<multaDB> listarMultasVencidas() {
+    public List<MultaDB> listarMultasVencidas() {
         return multas.stream()
                 .filter(m -> "PENDENTE".equals(m.getStatus()))
                 .filter(m -> m.getDataVencimento().isBefore(LocalDateTime.now()))
@@ -41,7 +47,7 @@ public class gestaoMultas {
     }
 
     public void registrarPagamentoMulta(long multaId, String comprovante) {
-        multaDB multa = buscarMultaPorId(multaId);
+        MultaDB multa = buscarMultaPorId(multaId);
         if (multa != null && "PENDENTE".equals(multa.getStatus())) {
             multa.pagarMulta(comprovante);
         } else {
@@ -50,7 +56,7 @@ public class gestaoMultas {
     }
 
     public void contestarMulta(long multaId, String motivo) {
-        multaDB multa = buscarMultaPorId(multaId);
+        MultaDB multa = buscarMultaPorId(multaId);
         if (multa != null && "PENDENTE".equals(multa.getStatus())) {
             multa.contestarMulta(motivo);
         } else {
@@ -60,7 +66,7 @@ public class gestaoMultas {
 
     public void cancelarMulta(String multaId, String motivo) {
         Long id = Long.parseLong(multaId);
-        multaDB multa = buscarMultaPorId(id);
+        MultaDB multa = buscarMultaPorId(id);
         if (multa != null && !"PAGA".equals(multa.getStatus())) {
             multa.cancelarMulta(motivo);
         } else {
@@ -72,17 +78,16 @@ public class gestaoMultas {
         return multas.stream()
                 .filter(m -> m.getMorador().equals(morador))
                 .filter(m -> "PENDENTE".equals(m.getStatus()))
-                .map(multaDB::getValor)
+                .map(MultaDB::getValor)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    private multaDB buscarMultaPorId(long id) {
+    private MultaDB buscarMultaPorId(long id) {
         return multas.stream()
                 .filter(m -> Objects.equals(m.getId(), id))
                 .findFirst()
                 .orElse(null);
     }
-
 
     public boolean possuiMultasPendentes(moradorDB moradorInadimplente) {
         return multas.stream()

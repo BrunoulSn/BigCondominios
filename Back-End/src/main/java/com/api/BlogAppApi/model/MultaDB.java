@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "multa") // você pode ajustar o nome conforme desejar
 
-public class multaDB {
+public class  MultaDB{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

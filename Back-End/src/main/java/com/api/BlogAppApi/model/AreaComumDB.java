@@ -11,7 +11,7 @@ import com.api.BlogAppApi.utils.Reserva;
 
 @Entity
 @Table(name = "area_comum")
-public class areaComumDB implements Serializable {
+public class AreaComumDB  implements Serializable {
     @Serial
     private static final long serialVersionUID = 1l;
 
@@ -27,12 +27,14 @@ public class areaComumDB implements Serializable {
     @Column(nullable = false)
 
     @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<reservaDB> reservas = new ArrayList<>();
+    private List<ReservaDB> reservas = new ArrayList<>();
 
-    public areaComumDB(String nome) {
+    public AreaComumDB (String nome) {
         this.nome = nome;
         this.disponivel = true;
         this.reservas = new ArrayList<>();
+    }
+    public AreaComumDB() {
     }
 
     public String getNome() {
@@ -51,11 +53,11 @@ public class areaComumDB implements Serializable {
         this.disponivel = disponivel;
     }
 
-    public List<reservaDB> getReservas() {
+    public List<ReservaDB> getReservas() {
         return reservas;
     }
 
-    public void setReservas(List<reservaDB> reservas) {
+    public void setReservas(List<ReservaDB> reservas) {
         this.reservas = reservas;
     }
 }

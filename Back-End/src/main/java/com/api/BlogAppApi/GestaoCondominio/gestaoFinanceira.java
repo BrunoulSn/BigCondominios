@@ -1,9 +1,14 @@
-package com.api.BlogAppApi.model;
+
+package com.api.BlogAppApi.GestaoCondominio;
+
+import com.api.BlogAppApi.model.pagamentoDB;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class gestaoFinanceira {
     private List<pagamentoDB> pagamentos;
 
