@@ -1,0 +1,54 @@
+.secaoFinanceira {
+    width: 90%;
+    background: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.secaoFinanceira h2 {
+    text-align: center;
+    color: #004Bad;
+    margin-bottom: 20px;
+}
+
+.formPagamento {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.formPagamento input {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    min-width: 200px;
+}
+
+.formPagamento button {
+    padding: 10px 20px;
+    background-color: #004Bad;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.tabelaPagamentos {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabelaPagamentos th,
+.tabelaPagamentos td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.tabelaPagamentos th {
+    background-color: #e1e8ff;
+}

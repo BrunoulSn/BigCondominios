@@ -1,0 +1,42 @@
+.secaoMultas {
+    width: 90%;
+    background: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.secaoMultas h2 {
+    text-align: center;
+    color: #004Bad;
+    margin-bottom: 20px;
+}
+
+.tabelaMultas {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabelaMultas th, .tabelaMultas td {
+    padding: 12px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.tabelaMultas th {
+    background-color: #e1e8ff;
+}
+
+.tabelaMultas button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+}
+
+.tabelaMultas .pagar { background-color: #28a745; }
+.tabelaMultas .contestar { background-color: #ffc107; }
+.tabelaMultas .cancelar { background-color: #dc3545; }
