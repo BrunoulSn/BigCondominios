@@ -6,9 +6,12 @@ import java.util.List;
 public class Morador {
     private String id;
     private String nome;
-    private String apartamento;
-    private String telefone;
+    private String CPF;
     private String email;
+    private String senha;
+    private String apartamento;
+    private String bloco;
+    private String telefone;  
     private List<Visita> historicoVisitas;
     private List<Multa> multas;
 
@@ -77,4 +80,29 @@ public class Morador {
     public void setMultas(List<Multa> multas) {
         this.multas = multas;
     }
+
+    public String getSenha(){
+        return senha;
+    }
+
+    public void setSenha(String senha){
+        this.senha = senha;
+    }
+
+    public String getBloco(){
+        return bloco;
+    }
+    
+    public void setBloco(String bloco){
+        this.bloco = bloco;
+    }
+
+    public String getCPF(){
+        return CPF;
+    }
+
+    public void setCPF(String CPF){
+        this.CPF = CPF;
+    }
+
 }

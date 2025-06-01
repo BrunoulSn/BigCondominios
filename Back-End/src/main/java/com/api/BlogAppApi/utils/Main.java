@@ -21,10 +21,6 @@ public class Main {
             Morador morador2 = new Morador("2", "Maria Santos", "102", "11988888888", "maria@email.com");
             Morador moradorInadimplente = new Morador("3", "Pedro Oliveira", "103", "11977777777", "pedro@email.com");
 
-            gestaoMoradores.cadastrarMorador(morador1);
-            gestaoMoradores.cadastrarMorador(morador2);
-            gestaoMoradores.cadastrarMorador(moradorInadimplente);
-
             System.out.println("Moradores cadastrados:");
             gestaoMoradores.listarMoradores().forEach(m -> 
                 System.out.println("- " + m.getNome() + " (Apto " + m.getApartamento() + ")"));

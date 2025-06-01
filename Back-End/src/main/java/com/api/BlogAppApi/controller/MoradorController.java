@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/moradores")
+@RequestMapping("/morador")
+@CrossOrigin(origins = "*")
 public class MoradorController {
 
     @Autowired

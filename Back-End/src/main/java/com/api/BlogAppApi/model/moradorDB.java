@@ -15,14 +15,23 @@ public class moradorDB {
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @Column(nullable = false, length = 10)
-    private String apartamento;
-
-    @Column(nullable = false, length = 20)
-    private String telefone;
+    @Column(nullable = false, length = 100)
+    private String CPF;
 
     @Column(nullable = false, length = 100)
     private String email;
+
+    @Column(nullable = false, length = 100)
+    private String senha;
+
+    @Column(nullable = false, length = 10)
+    private String apartamento;
+
+    @Column(nullable = false, length = 100)
+    private String bloco;
+
+    @Column(nullable = false, length = 20)
+    private String telefone;  
 
     @OneToMany(mappedBy = "moradorResponsavel", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<visitaDB> historicoVisitas = new ArrayList<>();
@@ -32,12 +41,15 @@ public class moradorDB {
 
     public moradorDB() {}
 
-    public moradorDB(Long id, String nome, String apartamento, String telefone, String email) {
+    public moradorDB(Long id, String nome, String CPF, String email, String senha, String apartamento, String bloco, String telefone) {
         this.id = id;
         this.nome = nome;
-        this.apartamento = apartamento;
-        this.telefone = telefone;
+        this.CPF = CPF;
         this.email = email;
+        this.senha = senha;
+        this.apartamento = apartamento;
+        this.bloco = bloco;
+        this.telefone = telefone;
     }
 
     // Getters e Setters
@@ -80,6 +92,30 @@ public class moradorDB {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCPF(){
+        return CPF;
+    }
+
+    public void setCPF(String CPF){
+        this.CPF = CPF;
+    }
+
+    public String getSenha(){
+        return senha;
+    }
+
+    public void setSenha(String senha){
+        this.senha = senha;
+    }
+
+    public String getBloco(){
+        return bloco;
+    }
+    
+    public void setBloco(String bloco){
+        this.bloco = bloco;
     }
 
     public List<visitaDB> getHistoricoVisitas() {
