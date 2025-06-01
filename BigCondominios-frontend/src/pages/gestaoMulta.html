@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Multas - BigCondomínios</title>
+     <link rel="stylesheet" href="/public/styles/gestaoMultaStyle.css" />
+    <link rel="stylesheet" href="/public/styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+  <main class="content">
+    <header id="navbar"></header>
+    <script>
+        fetch('/src/pages/navbar.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('navbar').innerHTML = data);
+    </script>
+        <!-- Seção de Gestão de Multas -->
+        <section class="secaoMultas">
+            <h2>Gestão de Multas</h2>
+            <table class="tabelaMultas">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Morador</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th>Vencimento</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaMultasBody">
+                    <!-- Dados preenchidos via JS -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+
+</html>

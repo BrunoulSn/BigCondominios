@@ -1,0 +1,54 @@
+.secaoMoradores {
+    width: 90%;
+    background: #fff;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.secaoMoradores h2 {
+    text-align: center;
+    color: #004Bad;
+    margin-bottom: 20px;
+}
+
+.formMorador {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.formMorador input {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    min-width: 200px;
+}
+
+.formMorador button {
+    padding: 10px 20px;
+    background-color: #004Bad;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+.tabelaMoradores {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabelaMoradores th,
+.tabelaMoradores td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.tabelaMoradores th {
+    background-color: #e1e8ff;
+}

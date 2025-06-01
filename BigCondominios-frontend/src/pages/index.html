@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIGCONDOMÍNIOS</title>
+    <link rel="stylesheet" href="/public/styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="content">
+        <header id="navbar"></header>
+
+        <script>
+            fetch('/src/pages/navbar.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('navbar').innerHTML = data);
+        </script>
+
+        <div class="divLogoTexto">
+            <h1 id="title" style="color: rgb(0, 0, 0);">
+                <img src="/assets/logoApp.png" alt="Logo app">
+            </h1>
+        </div>
+
+        <div class="divMuralAvisosRapidos">
+            <article class="avisosRapidos">
+                <h1>Convidados Esperados</h1>
+                <span>João Vitor 12:30 22/05/2025 - Convidado da Moradora Maria</span>
+                <p></p>
+            </article>
+
+            <article class="avisosRapidos">
+                <h1>Áreas Agendadas</h1>
+                <img src="https://i.pinimg.com/736x/3e/da/1d/3eda1dea8938ccad496796df932e559c.jpg" alt="">
+                <p>Maria agendou Churrasqueira Norte</p>
+            </article>
+
+            <article class="avisosRapidos">
+                <h1>Multas</h1>
+                <span>Maria som alto após 22 horas R$35,00 Não Pago</span>
+                <p>Maria manteu o som alto em sua moradia após 22 horas, diversas reclamações feitas e nenhuma solicitação
+                    atendida</p>
+            </article>
+        </div>
+    </div>
+
+    <script src="/public/scripts/index.js"></script>
+</body>
+
+</html>

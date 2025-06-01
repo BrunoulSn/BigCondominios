@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BIGCONDOMÍNIOS - LOGIN</title>
+     <link rel="stylesheet" href="./styles/loginStyle.CSS" />
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <img src="predio.png" alt="Imagem de Prédio" class="top-image" />
+            <h1>BIGCONDOMÍNIOS</h1>
+         <form onsubmit="return redirecionar(event)">
+            <input type="email" placeholder="Digite seu email" required />
+            <input type="password" placeholder="Digite sua senha" required />
+            <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+            <button type="submit" class="login-button">Acessar</button>
+         </form>
+            <p class= "signup-text">Ainda não possui conta? <a href="cadastro.html">Cadastre-se</a></p>
+        </div>
+    </div>
+
+
+    <script>
+    function redirecionar(event) {
+        event.preventDefault(); // impede o envio padrão
+        // Aqui você pode validar os dados ou simular login
+        window.location.href = "main.html"; // redireciona
+        return false;
+    }
+    </script>
+
+</body>
+</html>

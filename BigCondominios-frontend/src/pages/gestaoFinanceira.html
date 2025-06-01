@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestão Financeira - BigCondomínios</title>
+  <link rel="stylesheet" href="/public/styles/gestaoFinanceiraStyle.css" />
+  <link rel="stylesheet" href="/public/styles/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+  <main class="content">
+
+        <header id="navbar"></header>
+    
+    <script>
+        fetch('/src/pages/navbar.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('navbar').innerHTML = data);
+    </script>
+    <!-- Seção de Gestão Financeira -->
+    <section class="secaoFinanceira">
+      <h2>Registrar Pagamento</h2>
+      <div class="formPagamento">
+        <input type="text" id="nomeMorador" placeholder="Nome do morador" />
+        <input type="number" step="0.01" id="valorPagamento" placeholder="Valor (R$)" />
+        <input type="date" id="dataPagamento" />
+        <button onclick="registrarPagamento()">Registrar</button>
+      </div>
+
+      <h2>Pagamentos Registrados</h2>
+      <table class="tabelaPagamentos">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Morador</th>
+            <th>Valor</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody id="corpoTabelaPagamentos">
+          <!-- Conteúdo preenchido via JS -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script src="/BigCondominios-frontend/src/gestaoFinanceira.js"></script>
+</body>
+
+</html>
