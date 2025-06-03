@@ -2,7 +2,6 @@
 package com.api.BlogAppApi.GestaoCondominio;
 
 import com.api.BlogAppApi.model.moradorDB;
-import com.api.BlogAppApi.utils.Morador;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class gestaomoradores {
         moradores.add(morador);
     }
 
-    public void atualizarMorador(Morador moradorAtualizado) {
+    public void atualizarMorador(moradorDB moradorAtualizado) {
         if (moradorAtualizado == null || moradorAtualizado.getId() == null) {
             throw new IllegalArgumentException("Morador inválido para atualização");
         }

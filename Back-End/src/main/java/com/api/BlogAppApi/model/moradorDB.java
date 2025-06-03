@@ -52,7 +52,6 @@ public class moradorDB {
         this.telefone = telefone;
     }
 
-    // Getters e Setters
 
     public Long getId() {
         return id;
