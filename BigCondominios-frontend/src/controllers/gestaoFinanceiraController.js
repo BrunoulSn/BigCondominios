@@ -22,23 +22,49 @@ function listarPagamentos() {
 
 function registrarPagamento() {
     const nome = document.getElementById("nomeMorador").value.trim();
-    const valor = parseFloat(document.getElementById("valorPagamento").value);
+    const valorStr = document.getElementById("valorPagamento").value;
+    const valor = parseFloat(valorStr.replace(",", "."));
     const data = document.getElementById("dataPagamento").value;
 
-    if (!nome || !valor || !data) {
-    alert("Preencha todos os campos corretamente!");
-    return;
+    // Nome obrigatório e mínimo de 3 caracteres
+    if (!nome || nome.length < 3) {
+        alert("Informe o nome do morador (mínimo 3 letras).");
+        return;
+    }
+
+    // Valor obrigatório, numérico e positivo
+    if (!valorStr || isNaN(valor) || valor <= 0) {
+        alert("Informe um valor válido e maior que zero.");
+        return;
+    }
+
+    // Data obrigatória e válida
+    if (!data) {
+        alert("Informe a data do pagamento.");
+        return;
+    }
+    const dataPag = new Date(data);
+    if (isNaN(dataPag.getTime())) {
+        alert("Data inválida.");
+        return;
+    }
+    // Não permitir datas futuras
+    const hoje = new Date();
+    hoje.setHours(0,0,0,0);
+    if (dataPag > hoje) {
+        alert("A data do pagamento não pode ser futura.");
+        return;
     }
 
     const pagamento = {
-    morador: nome,
-    valor: valor,
-    data: data
+        morador: nome,
+        valor: valor,
+        data: data
     };
 
     fetch("http://localhost:8080/api/pagamentos", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(pagamento)
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(pagamento)
     }).then(() => listarPagamentos());
 }

@@ -25,7 +25,9 @@
     <section class="secaoFinanceira">
       <h2>Registrar Pagamento</h2>
       <div class="formPagamento">
-        <input type="text" id="nomeMorador" placeholder="Nome do morador" />
+        <select id="moradorSelect">
+          <option value="">Selecione um morador</option>
+          <!-- Opções preenchidas via JS -->
         <input type="number" step="0.01" id="valorPagamento" placeholder="Valor (R$)" />
         <input type="date" id="dataPagamento" />
         <button onclick="registrarPagamento()">Registrar</button>

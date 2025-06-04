@@ -52,3 +52,9 @@
 .tabelaPagamentos th {
     background-color: #e1e8ff;
 }
+ .formPagamento select {
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            min-width: 200px;
+        }
