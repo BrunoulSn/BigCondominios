@@ -1,5 +1,6 @@
 package com.api.BlogAppApi.service;
 
+import com.api.BlogAppApi.Utils.CriptografiaUtil;
 import com.api.BlogAppApi.model.moradorDB;
 import com.api.BlogAppApi.repository.moradorDBRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +17,28 @@ public class MoradorService {
     moradorDBRepository moradorDBRepository;
 
     public List<moradorDB> findAll() {
-        return moradorDBRepository.findAll();
+        List<moradorDB> moradores = moradorDBRepository.findAll();
+        moradores.forEach(morador -> {
+            morador.setCPF(CriptografiaUtil.descriptografarAES(morador.getCPF()));
+            morador.setEmail(CriptografiaUtil.descriptografarAES(morador.getEmail()));
+        });
+        return moradores;
     }
 
     public Optional<moradorDB> findById(long id) {
-        return moradorDBRepository.findById(id);
+        Optional<moradorDB> optionalMorador = moradorDBRepository.findById(id);
+        optionalMorador.ifPresent(morador -> {
+            morador.setCPF(CriptografiaUtil.descriptografarAES(morador.getCPF()));
+            morador.setEmail(CriptografiaUtil.descriptografarAES(morador.getEmail()));
+        });
+        return optionalMorador;
     }
 
     @Transactional
     public moradorDB save(moradorDB morador) {
+        morador.setSenha(CriptografiaUtil.hashSenha(morador.getSenha()));
+        morador.setCPF(CriptografiaUtil.criptografarAES(morador.getCPF()));
+        morador.setEmail(CriptografiaUtil.criptografarAES(morador.getEmail()));
         return moradorDBRepository.save(morador);
     }
 
