@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BIGCONDOMÍNIOS</title>
-    <link rel="stylesheet" href="/public/styles/index.css">
+    <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -14,14 +14,14 @@
         <header id="navbar"></header>
 
         <script>
-            fetch('/src/pages/navbar.html')
+            fetch('/BigCondominios-frontend/src/pages/navbar.html')
                 .then(response => response.text())
                 .then(data => document.getElementById('navbar').innerHTML = data);
         </script>
 
         <div class="divLogoTexto">
             <h1 id="title" style="color: rgb(0, 0, 0);">
-                <img src="/assets/logoApp.png" alt="Logo app">
+                <img src="/BigCondominios-frontend/assets/logoApp.png" alt="Logo app">
             </h1>
         </div>
 

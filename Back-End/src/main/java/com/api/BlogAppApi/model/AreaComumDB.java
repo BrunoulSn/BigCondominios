@@ -7,8 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.api.BlogAppApi.utils.Reserva;
-
 @Entity
 @Table(name = "area_comum")
 public class AreaComumDB  implements Serializable {

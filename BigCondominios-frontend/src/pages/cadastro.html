@@ -5,9 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BIGCONDOMÍNIOS - Cadastro</title>
-    <link rel="stylesheet" href="/public/styles/cadastroStyle.css" />
+    <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/cadastroStyle.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="/public/styles/index.css">
+    <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/index.css">
 
 </head>
 
@@ -15,14 +15,14 @@
     <div class="content">
         <header id="navbar"></header>
         <script>
-            fetch('/src/pages/navbar.html')
+            fetch('/BigCondominios-frontend/src/pages/navbar.html')
                 .then(response => response.text())
                 .then(data => document.getElementById('navbar').innerHTML = data);
         </script>
 
         <div class="cadastro-container">
             <div class="cadastro-box">
-                <img src="/assets/logoApp.png" alt="Imagem de Prédio" class="top-image" />
+                <img src="/BigCondominios-frontend/assets/logoApp.png" alt="Imagem de Prédio" class="top-image" />
                 <h1>Cadastro</h1>
                 <form onsubmit="return cadastrarMorador(event)">
                     <input type="text" id="nomeMorador" placeholder="Nome completo" required />
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <script src="/src/controllers/cadastro.js"></script>
+    <script src="/BigCondominios-frontend/src/controllers/cadastro.js"></script>
 </body>
 
 </html>
