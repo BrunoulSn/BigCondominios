@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Multas - BigCondomínios</title>
-     <link rel="stylesheet" href="/public/styles/gestaoMultaStyle.css" />
+     <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/gestaoMultaStyle.css" />
     <link rel="stylesheet" href="/public/styles/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -15,7 +15,7 @@
   <main class="content">
     <header id="navbar"></header>
     <script>
-        fetch('/src/pages/navbar.html')
+        fetch('BigCondominios-frontend/src/pages/navbar.html')
             .then(response => response.text())
             .then(data => document.getElementById('navbar').innerHTML = data);
     </script>
