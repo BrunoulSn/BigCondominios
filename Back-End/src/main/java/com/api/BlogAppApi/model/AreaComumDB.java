@@ -6,11 +6,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 @Entity
 @Table(name = "area_comum")
 public class AreaComumDB  implements Serializable {
