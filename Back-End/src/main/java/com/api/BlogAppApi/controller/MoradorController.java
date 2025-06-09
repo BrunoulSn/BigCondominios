@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/morador")
-@CrossOrigin(origins = "*")
 public class MoradorController {
 
     @Autowired
