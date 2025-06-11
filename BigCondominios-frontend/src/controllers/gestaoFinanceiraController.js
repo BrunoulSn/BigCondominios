@@ -21,7 +21,7 @@ function listarPagamentos() {
 }
 
 function registrarPagamento() {
-    const nome = document.getElementById("nomeMorador").value.trim();
+    const nome = document.getElementById("moradorSelect").value;
     const valorStr = document.getElementById("valorPagamento").value;
     const valor = parseFloat(valorStr.replace(",", "."));
     const data = document.getElementById("dataPagamento").value;
@@ -67,4 +67,26 @@ function registrarPagamento() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(pagamento)
     }).then(() => listarPagamentos());
+}
+
+function handleMoradorSelectClick() {
+    const select = document.getElementById("moradorSelect");
+
+    // Evita repopular se já tem mais de 1 opção (1 é o "Selecione um morador")
+    if (select.options.length > 1) return;
+
+    fetch("http://localhost:8080/api/morador")
+        .then(res => res.json())
+        .then(moradores => {
+            moradores.forEach(m => {
+                const option = document.createElement("option");
+                option.value = m.nome; // ou m.id se preferir trabalhar com IDs
+                option.textContent = m.nome;
+                select.appendChild(option);
+            });
+        })
+        .catch(err => {
+            console.error("Erro ao buscar moradores:", err);
+            alert("Não foi possível carregar os moradores.");
+        });
 }

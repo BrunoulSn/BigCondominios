@@ -23,11 +23,26 @@
         <section class="secaoReservas">
             <h2>Agendar Área Comum</h2>
             <div class="formReserva">
-                <select id="areaSelect">
-                    <option value="">Selecione uma área</option>
-                </select>
-                <input type="datetime-local" id="dataHoraInicio" />
-                <button onclick="validarDataReserva()">Agendar</button>
+                <div class="grupoCampo">
+                    <label for="areaSelect">Área:</label>
+                    <select id="areaSelect">
+                        <option value="">Selecione uma área</option>
+                    </select>
+                </div>
+
+                <div class="grupoCampo">
+                    <label for="inicioReserva">Data do Aluguel:</label>
+                    <input type="date" name="inicioReserva" id="dataReserva">
+                </div>
+
+                <div class="grupoCampo">
+                    <label for="moradorSelect">Morador:</label>
+                    <select id="moradorSelect">
+                        <option value="">Selecione um morador</option>
+                    </select>
+                </div>
+
+                <button class="botaoAgendar" onclick="validarDataReserva()">Agendar</button>
             </div>
 
             <h2>Reservas Futuras</h2>
@@ -49,7 +64,7 @@
         </section>
     </main>
 
-    <script src="/BigCondominios-frontend/src/controllers/gestaoFinanceiraController.js"></script>
+    <script src="/BigCondominios-frontend/src/controllers/areaComumController.js"></script>
 </body>
 
 </html>

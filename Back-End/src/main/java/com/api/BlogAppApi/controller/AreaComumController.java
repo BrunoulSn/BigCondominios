@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/areas-comuns")
+@RequestMapping("/area-comum")
 public class AreaComumController {
 
     @Autowired
