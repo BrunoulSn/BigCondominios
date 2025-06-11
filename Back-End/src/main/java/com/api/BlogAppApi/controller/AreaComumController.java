@@ -1,6 +1,7 @@
 package com.api.BlogAppApi.controller;
 
 import com.api.BlogAppApi.DTOs.AreaComumDTO;
+import com.api.BlogAppApi.DTOs.AreaSimplesDTO;
 import com.api.BlogAppApi.model.AreaComumDB;
 import com.api.BlogAppApi.service.AreaComumService;
 import jakarta.validation.Valid;
@@ -20,12 +21,16 @@ public class AreaComumController {
     AreaComumService areaComumService;
 
     @GetMapping
-    public ResponseEntity<List<AreaComumDB>> getAllAreas() {
-        List<AreaComumDB> areas = areaComumService.findAll();
-        return areas.isEmpty()
-            ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(areas)
-            : ResponseEntity.ok(areas);
+    public ResponseEntity<List<AreaSimplesDTO>> getAllAreas() {
+        List<AreaSimplesDTO> areasDTO = areaComumService.findAll().stream()
+            .map(area -> new AreaSimplesDTO(area.getId(), area.getNome()))
+            .toList();
+
+        return areasDTO.isEmpty()
+            ? ResponseEntity.status(HttpStatus.NOT_FOUND).body(areasDTO)
+            : ResponseEntity.ok(areasDTO);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getAreaDetails(@PathVariable long id) {

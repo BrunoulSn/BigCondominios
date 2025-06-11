@@ -57,7 +57,7 @@ function carregarAreas() {
             });
         });
 }
-/*
+
 function listarReservas() {
     fetch("http://localhost:8080/api/reservas/futuras")
         .then(res => res.json())
@@ -79,8 +79,8 @@ function listarReservas() {
                 tbody.appendChild(tr);
             });
         });
-}*/
-/*
+}
+
 function fazerReserva() {
   const areaId = document.getElementById("areaSelect").value;
   const moradorId = document.getElementById("moradorSelect").value;
@@ -107,7 +107,7 @@ function fazerReserva() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body)
   }).then(() => listarReservas());
-}*/
+}
 
 function cancelarReserva(id) {
     if (!confirm("Deseja cancelar esta reserva?")) return;
