@@ -36,6 +36,31 @@
     cursor: pointer;
     color: white;
 }
+.tituloMultas {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.botoesAcoes {
+    display: flex;
+    gap: 10px;
+}
+
+.btnAcao {
+    padding: 6px 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.btnAcao.adicionar { background-color: #C8A2C8; }
+.btnAcao.alterar   { background-color: #C8A2C8; color: black; }
+.btnAcao.excluir   { background-color: #C8A2C8; }
 
 .tabelaMultas .pagar { background-color: #28a745; }
 .tabelaMultas .contestar { background-color: #ffc107; }

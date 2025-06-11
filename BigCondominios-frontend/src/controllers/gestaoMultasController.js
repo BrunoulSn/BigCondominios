@@ -62,4 +62,3 @@ function cancelarMulta(id) {
         body: JSON.stringify({ motivo })
     }).then(() => carregarMultas());
 }
-
