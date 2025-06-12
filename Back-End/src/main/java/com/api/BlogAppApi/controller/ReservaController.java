@@ -74,13 +74,7 @@ public class ReservaController {
 
     @GetMapping("/futuras")
     public ResponseEntity<List<ReservaDB>> listarReservasFuturas() {
-        LocalDate hoje = LocalDate.now();
-
         List<ReservaDB> futuras = reservaService.findAll().stream()
-            .filter(r -> {
-                LocalDate dataReserva = r.getDataReserva(); // converte para LocalDate
-                return dataReserva.isAfter(hoje) || dataReserva.isEqual(hoje);
-            })
             .filter(r -> !r.getStatus().equalsIgnoreCase("cancelada"))
             .toList();
 
