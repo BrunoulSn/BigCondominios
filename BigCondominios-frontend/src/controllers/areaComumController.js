@@ -62,7 +62,6 @@ function listarReservas() {
     fetch("http://localhost:8080/reservas/futuras")
         .then(res => res.json())
         .then(reservas => {
-          console.log(reservas);
             const tbody = document.getElementById("corpoTabelaReservas");
             tbody.innerHTML = "";
 
@@ -115,11 +114,21 @@ function fazerReserva() {
 }
 
 function cancelarReserva(id) {
-    if (!confirm("Deseja cancelar esta reserva?")) return;
+    if (!confirm("Deseja realmente cancelar esta reserva?")) return;
 
-    fetch(`http://localhost:8080/reservas/${id}/cancelar`, {
-        method: "POST"
-    }).then(() => listarReservas());
+    fetch(`http://localhost:8080/reservas/${id}`, {
+        method: "DELETE"
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Erro ao cancelar a reserva.");
+        }
+        alert("Reserva cancelada com sucesso.");
+        listarReservas();
+    })
+    .catch(error => {
+        alert("Erro ao cancelar: " + error.message);
+    });
 }
 
 function carregarMoradores() {
