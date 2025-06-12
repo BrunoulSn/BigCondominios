@@ -62,6 +62,7 @@ function listarReservas() {
     fetch("http://localhost:8080/reservas/futuras")
         .then(res => res.json())
         .then(reservas => {
+          console.log(reservas);
             const tbody = document.getElementById("corpoTabelaReservas");
             tbody.innerHTML = "";
 
@@ -106,7 +107,6 @@ function fazerReserva() {
     data: dataReserva
   };
 
-  console.log("dados enviados:", body)
   fetch("http://localhost:8080/reservas", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

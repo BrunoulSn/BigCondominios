@@ -2,6 +2,7 @@
 package com.api.BlogAppApi.controller;
 
 import com.api.BlogAppApi.DTOs.ReservaDTO;
+import com.api.BlogAppApi.DTOs.ReservaResponseDTO;
 import com.api.BlogAppApi.model.ReservaDB;
 import com.api.BlogAppApi.service.AreaComumService;
 import com.api.BlogAppApi.service.MoradorService;
@@ -73,12 +74,14 @@ public class ReservaController {
     }
 
     @GetMapping("/futuras")
-    public ResponseEntity<List<ReservaDB>> listarReservasFuturas() {
-        List<ReservaDB> futuras = reservaService.findAll().stream()
+    public ResponseEntity<List<ReservaResponseDTO>> listarReservasFuturas() {
+        List<ReservaResponseDTO> futuras = reservaService.findAll().stream()
             .filter(r -> !r.getStatus().equalsIgnoreCase("cancelada"))
+            .map(ReservaResponseDTO::fromEntity)
             .toList();
 
         return ResponseEntity.ok(futuras);
     }
+
 
 }

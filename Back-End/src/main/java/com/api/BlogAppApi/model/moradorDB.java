@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "morador")
 public class moradorDB {
@@ -37,6 +39,7 @@ public class moradorDB {
     private List<visitaDB> historicoVisitas = new ArrayList<>();
 
     @OneToMany(mappedBy = "morador", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<MultaDB> multas = new ArrayList<>();
 
     public moradorDB() {}

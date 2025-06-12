@@ -6,6 +6,8 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "area_comum")
 public class AreaComumDB  implements Serializable {
@@ -24,6 +26,7 @@ public class AreaComumDB  implements Serializable {
     @Column(nullable = false)
 
     @OneToMany(mappedBy = "area", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<ReservaDB> reservas = new ArrayList<>();
 
     public AreaComumDB (String nome) {
