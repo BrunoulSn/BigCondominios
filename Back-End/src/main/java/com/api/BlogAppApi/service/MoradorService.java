@@ -26,12 +26,22 @@ public class MoradorService {
     }
 
     public Optional<moradorDB> findById(long id) {
-        Optional<moradorDB> optionalMorador = moradorDBRepository.findById(id);
-        optionalMorador.ifPresent(morador -> {
-            morador.setCPF(CriptografiaUtil.descriptografarAES(morador.getCPF()));
-            morador.setEmail(CriptografiaUtil.descriptografarAES(morador.getEmail()));
-        });
-        return optionalMorador;
+        return moradorDBRepository.findById(id)
+            .map(moradorOriginal -> {
+                moradorDB clone = new moradorDB();
+                clone.setId(moradorOriginal.getId());
+                clone.setNome(moradorOriginal.getNome());
+                clone.setApartamento(moradorOriginal.getApartamento());
+                clone.setBloco(moradorOriginal.getBloco());
+                clone.setTelefone(moradorOriginal.getTelefone());
+                clone.setSenha(moradorOriginal.getSenha());
+
+                // descriptografados apenas no clone
+                clone.setCPF(CriptografiaUtil.descriptografarAES(moradorOriginal.getCPF()));
+                clone.setEmail(CriptografiaUtil.descriptografarAES(moradorOriginal.getEmail()));
+
+                return clone;
+            });
     }
 
     @Transactional
@@ -46,4 +56,6 @@ public class MoradorService {
     public void delete(moradorDB morador) {
         moradorDBRepository.delete(morador);
     }
+
+
 }

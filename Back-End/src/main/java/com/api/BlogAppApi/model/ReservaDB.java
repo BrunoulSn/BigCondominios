@@ -1,7 +1,7 @@
 package com.api.BlogAppApi.model;
+import java.time.LocalDate;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reserva")
@@ -19,11 +19,8 @@ public class ReservaDB {
     @JoinColumn(name = "area_id")
     private AreaComumDB area;
 
-    @Column(name = "data_hora_inicio", nullable = false)
-    private LocalDateTime dataHoraInicio;
-
-    @Column(name = "data_hora_fim", nullable = false)
-    private LocalDateTime dataHoraFim;
+    @Column(name = "data", nullable = false)
+    private LocalDate dataReserva;
 
     @Column(nullable = false, length = 20)
     private String status;
@@ -32,12 +29,11 @@ public class ReservaDB {
         this.status = "AGENDADA";
     }
 
-    public ReservaDB(Long id, moradorDB morador, AreaComumDB area, LocalDateTime inicio, LocalDateTime fim) {
+    public ReservaDB(Long id, moradorDB morador, AreaComumDB area, LocalDate data) {
         this.id = id;
         this.morador = morador;
         this.area = area;
-        this.dataHoraInicio = inicio;
-        this.dataHoraFim = fim;
+        this.dataReserva = data;
         this.status = "AGENDADA";
     }
 
@@ -66,21 +62,13 @@ public class ReservaDB {
     public void setArea(AreaComumDB area) {
         this.area = area;
     }
-
-    public LocalDateTime getDataHoraInicio() {
-        return dataHoraInicio;
+    
+    public LocalDate getDataReserva() {
+        return dataReserva;
     }
 
-    public void setDataHoraInicio(LocalDateTime dataHoraInicio) {
-        this.dataHoraInicio = dataHoraInicio;
-    }
-
-    public LocalDateTime getDataHoraFim() {
-        return dataHoraFim;
-    }
-
-    public void setDataHoraFim(LocalDateTime dataHoraFim) {
-        this.dataHoraFim = dataHoraFim;
+    public void setDataReserva(LocalDate data) {
+        this.dataReserva = data;
     }
 
     public String getStatus() {

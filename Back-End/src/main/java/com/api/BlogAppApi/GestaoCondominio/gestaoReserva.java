@@ -5,6 +5,7 @@ import com.api.BlogAppApi.model.AreaComumDB;
 import com.api.BlogAppApi.model.ReservaDB;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,9 +40,9 @@ public class gestaoReserva {
     }
 
     public List<ReservaDB> listarReservasFuturas() {
-        LocalDateTime agora = LocalDateTime.now();
+        LocalDate agora = LocalDate.now();
         return reservas.stream()
-                .filter(r -> r.getDataHoraInicio().isAfter(agora))
+                .filter(r -> r.getDataReserva().isAfter(agora))
                 .filter(r -> !"CANCELADA".equals(r.getStatus()))
                 .collect(Collectors.toList());
     }
@@ -51,19 +52,18 @@ public class gestaoReserva {
     }
 
     private boolean isAreaDisponivel(AreaComumDB area, LocalDateTime data) {
+        LocalDate dataReserva = data.toLocalDate(); // converte aqui
+
         return reservas.stream()
                 .filter(r -> r.getArea().equals(area))
-                .filter(r -> !"CANCELADA".equals(r.getStatus()))
-                .noneMatch(r -> verificaConflitoDeDatas(r, data));
+                .filter(r -> !"CANCELADA".equalsIgnoreCase(r.getStatus()))
+                .noneMatch(r -> verificaConflitoDeDatas(r, dataReserva));
     }
 
-    private boolean verificaConflitoDeDatas(ReservaDB reserva, LocalDateTime data) {
-        LocalDateTime inicio = data;
-        LocalDateTime fim = data.plusHours(4); // Assumindo reserva padrão de 4 horas
-        return !(fim.isBefore(reserva.getDataHoraInicio()) ||
-                inicio.isAfter(reserva.getDataHoraFim()));
+    private boolean verificaConflitoDeDatas(ReservaDB reserva, LocalDate data) {
+        return reserva.getDataReserva().equals(data);
     }
-
+    
     public void fazerReserva(ReservaDB reserva1) {
         reservas.add(reserva1);
     }

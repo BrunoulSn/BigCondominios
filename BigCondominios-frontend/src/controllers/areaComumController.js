@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   carregarAreas();
   carregarMoradores();
-  //listarReservas();
+  listarReservas();
 });
 
 //Validações
@@ -59,27 +59,31 @@ function carregarAreas() {
 }
 
 function listarReservas() {
-    fetch("http://localhost:8080/api/reservas/futuras")
+    fetch("http://localhost:8080/reservas/futuras")
         .then(res => res.json())
         .then(reservas => {
             const tbody = document.getElementById("corpoTabelaReservas");
             tbody.innerHTML = "";
 
             reservas.forEach(res => {
+                const nomeArea = res.area?.nome || "Área indefinida";
+                const nomeMorador = res.morador?.nome || "Morador indefinido";
+                const dataReserva = res.dataReserva;
+
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-                            <td>${res.id}</td>
-                            <td>${res.area.nome}</td>
-                            <td>${new Date(res.dataReserva).toLocaleDateString()}</td>  
-                            <td>${res.status}</td>
-                            <td>
-                                <button onclick="cancelarReserva('${res.id}')">Cancelar</button>
-                            </td>
-                        `;
+                    <td>${nomeArea}</td>
+                    <td>${dataReserva}</td>
+                    <td>${nomeMorador}</td>
+                    <td>
+                        <button onclick="cancelarReserva('${res.id}')">Cancelar</button>
+                    </td>
+                `;
                 tbody.appendChild(tr);
             });
         });
 }
+
 
 function fazerReserva() {
   const areaId = document.getElementById("areaSelect").value;
@@ -99,10 +103,11 @@ function fazerReserva() {
   const body = {
     areaId: areaId,
     moradorId: moradorId,
-    dataReserva: dataReserva
+    data: dataReserva
   };
 
-  fetch("http://localhost:8080/api/reservas", {
+  console.log("dados enviados:", body)
+  fetch("http://localhost:8080/reservas", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body)
@@ -112,7 +117,7 @@ function fazerReserva() {
 function cancelarReserva(id) {
     if (!confirm("Deseja cancelar esta reserva?")) return;
 
-    fetch(`http://localhost:8080/api/reservas/${id}/cancelar`, {
+    fetch(`http://localhost:8080/reservas/${id}/cancelar`, {
         method: "POST"
     }).then(() => listarReservas());
 }

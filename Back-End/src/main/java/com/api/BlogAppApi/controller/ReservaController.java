@@ -3,6 +3,8 @@ package com.api.BlogAppApi.controller;
 
 import com.api.BlogAppApi.DTOs.ReservaDTO;
 import com.api.BlogAppApi.model.ReservaDB;
+import com.api.BlogAppApi.service.AreaComumService;
+import com.api.BlogAppApi.service.MoradorService;
 import com.api.BlogAppApi.service.ReservaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -10,7 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -18,7 +21,13 @@ import java.util.List;
 public class ReservaController {
 
     @Autowired
-    ReservaService reservaService;
+    private ReservaService reservaService;
+
+    @Autowired
+    private AreaComumService areaComumService;
+
+    @Autowired
+    private MoradorService moradorService;
 
     @GetMapping
     public ResponseEntity<List<ReservaDB>> getAllReservas() {
@@ -38,18 +47,21 @@ public class ReservaController {
     @PostMapping
     public ResponseEntity<Object> saveNewReserva(@RequestBody @Valid ReservaDTO dto) {
         var reserva = new ReservaDB();
-        BeanUtils.copyProperties(dto, reserva);
-        return ResponseEntity.status(HttpStatus.CREATED).body(reservaService.save(reserva));
-    }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<ReservaDB> editarReserva(@PathVariable Long id, @RequestBody ReservaDTO dto) {
-        return reservaService.findById(id).map(reserva -> {
-            reserva.setDataHoraInicio(dto.dataHoraInicio());
-            reserva.setDataHoraFim(dto.dataHoraFim());
-            reserva.setStatus(dto.status());
-            return ResponseEntity.ok(reservaService.save(reserva));
-        }).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        var areaOpt = areaComumService.findById(dto.areaId());
+        var moradorOpt = moradorService.findById(dto.moradorId());
+
+        if (areaOpt.isEmpty() || moradorOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("Morador ou área comum não encontrados.");
+        }
+
+        reserva.setArea(areaOpt.get());
+        reserva.setMorador(moradorOpt.get());
+        reserva.setDataReserva(dto.data());
+        reserva.setStatus("pendente"); // <- status atribuído internamente aqui
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(reservaService.save(reserva));
     }
 
     @DeleteMapping("/{id}")
@@ -59,4 +71,20 @@ public class ReservaController {
             return ResponseEntity.ok("Reserva deletada com sucesso");
         }).orElse(ResponseEntity.status(HttpStatus.NO_CONTENT).body("Reserva não encontrada"));
     }
+
+    @GetMapping("/futuras")
+    public ResponseEntity<List<ReservaDB>> listarReservasFuturas() {
+        LocalDate hoje = LocalDate.now();
+
+        List<ReservaDB> futuras = reservaService.findAll().stream()
+            .filter(r -> {
+                LocalDate dataReserva = r.getDataReserva(); // converte para LocalDate
+                return dataReserva.isAfter(hoje) || dataReserva.isEqual(hoje);
+            })
+            .filter(r -> !r.getStatus().equalsIgnoreCase("cancelada"))
+            .toList();
+
+        return ResponseEntity.ok(futuras);
+    }
+
 }
