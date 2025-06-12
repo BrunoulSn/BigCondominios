@@ -20,24 +20,54 @@
             .then(data => document.getElementById('navbar').innerHTML = data);
     </script>
         <!-- Seção de Gestão de Multas -->
-        <section class="secaoMultas">
-            <h2>Gestão de Multas</h2>
-            <table class="tabelaMultas">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Morador</th>
-                        <th>Valor</th>
-                        <th>Status</th>
-                        <th>Vencimento</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="tabelaMultasBody">
-                    <!-- Dados preenchidos via JS -->
-                </tbody>
-            </table>
-        </section>
+       <section class="secaoMultas">
+    <h2>Gestão de Multas</h2>
+    <div class="tabelaResponsiva">
+        <section class="formularioMulta">
+    <h3>Adicionar Nova Multa</h3>
+    <form id="formMulta">
+        <label for="morador">Morador:</label>
+        <select id="morador" required></select>
+
+        <label for="valor">Valor (R$):</label>
+        <input type="number" id="valor" step="0.01" min="0.01" required>
+
+        <label for="dataVencimento">Data de Vencimento:</label>
+        <input type="date" id="dataVencimento" required>
+
+        <label for="status">Status:</label>
+        <select id="status">
+            <option value="PENDENTE" selected>PENDENTE</option>
+            <option value="PAGA">PAGA</option>
+            <option value="CONTESTADA">CONTESTADA</option>
+            <option value="CANCELADA">CANCELADA</option>
+        </select>
+
+        <div class="botoesFormulario">
+            <button type="submit" class="btnAcao adicionar">Adicionar</button>
+            <button type="button" class="btnAcao cancelar" onclick="limparFormulario()">Cancelar</button>
+        </div>
+    </form>
+</section>
+
+        <table class="tabelaMultas">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Morador</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                    <th>Vencimento</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaMultasBody">
+                <!-- Dados preenchidos via JS -->
+            </tbody>
+        </table>
+    </div>
+</section>
+
     </main>
 </body>
 <script src="/BigCondominios-frontend/src/controllers/gestaoMultasController.js"></script>

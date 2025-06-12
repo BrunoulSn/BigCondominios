@@ -1,64 +1,57 @@
-document.addEventListener("DOMContentLoaded", carregarMultas);
+document.addEventListener("DOMContentLoaded", () => {
+    carregarMultas();
+    carregarMoradores();
+    document.getElementById("formMulta").addEventListener("submit", adicionarMulta);
+});
 
-function carregarMultas() {
-    fetch("http://localhost:8080/api/multas") // ajuste o endpoint conforme seu backend
+function carregarMoradores() {
+    fetch("http://localhost:8080/moradores") // ajuste se necessário
         .then(res => res.json())
-        .then(multas => {
-            const tbody = document.getElementById("tabelaMultasBody");
-            tbody.innerHTML = "";
-
-            multas.forEach(multa => {
-                const linha = document.createElement("tr");
-
-                linha.innerHTML = `
-                    <td>${multa.id}</td>
-                    <td>${multa.morador.nome}</td>
-                    <td>R$ ${parseFloat(multa.valor).toFixed(2)}</td>
-                    <td>${multa.status}</td>
-                    <td>${new Date(multa.dataVencimento).toLocaleDateString()}</td>
-                    <td>
-                        <button class="pagar" onclick="registrarPagamento(${multa.id})">Pagar</button>
-                        <button class="contestar" onclick="contestarMulta(${multa.id})">Contestar</button>
-                        <button class="cancelar" onclick="cancelarMulta(${multa.id})">Cancelar</button>
-                    </td>
-                `;
-                tbody.appendChild(linha);
+        .then(moradores => {
+            const select = document.getElementById("morador");
+            moradores.forEach(m => {
+                const option = document.createElement("option");
+                option.value = m.id;
+                option.textContent = m.nome;
+                select.appendChild(option);
             });
         })
-        .catch(error => {
-            console.error("Erro ao carregar multas:", error);
-        });
+        .catch(err => console.error("Erro ao carregar moradores:", err));
 }
 
-function registrarPagamento(id) {
-    const comprovante = prompt("Informe o comprovante:");
-    if (!comprovante) return;
+function adicionarMulta(event) {
+    event.preventDefault();
 
-    fetch(`http://localhost:8080/api/multas/${id}/pagar`, {
+    const multa = {
+        moradorId: document.getElementById("morador").value,
+        valor: parseFloat(document.getElementById("valor").value),
+        dataOcorrencia: new Date().toISOString(),
+        dataVencimento: new Date(document.getElementById("dataVencimento").value).toISOString(),
+        status: document.getElementById("status").value,
+        descricao: "Multa registrada manualmente",
+        gravidade: "leve" // ou permitir escolher
+    };
+
+    fetch("http://localhost:8080/multas", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ comprovante })
-    }).then(() => carregarMultas());
+        body: JSON.stringify(multa)
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Erro ao adicionar multa");
+        return res.json();
+    })
+    .then(() => {
+        alert("Multa adicionada com sucesso!");
+        carregarMultas();
+        limparFormulario();
+    })
+    .catch(err => {
+        console.error("Erro ao adicionar multa:", err);
+        alert("Erro ao adicionar multa.");
+    });
 }
 
-function contestarMulta(id) {
-    const motivo = prompt("Informe o motivo da contestação:");
-    if (!motivo) return;
-
-    fetch(`http://localhost:8080/api/multas/${id}/contestar`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ motivo })
-    }).then(() => carregarMultas());
-}
-
-function cancelarMulta(id) {
-    const motivo = prompt("Informe o motivo do cancelamento:");
-    if (!motivo) return;
-
-    fetch(`http://localhost:8080/api/multas/${id}/cancelar`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ motivo })
-    }).then(() => carregarMultas());
+function limparFormulario() {
+    document.getElementById("formMulta").reset();
 }
