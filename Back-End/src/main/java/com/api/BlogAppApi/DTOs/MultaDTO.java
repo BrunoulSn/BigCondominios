@@ -3,7 +3,7 @@ package com.api.BlogAppApi.DTOs;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record MultaDTO(
         Long id,
@@ -21,11 +21,11 @@ public record MultaDTO(
 
         @NotNull(message = "Data da ocorrência é obrigatória")
         @PastOrPresent(message = "Data da ocorrência não pode ser no futuro")
-        LocalDateTime dataOcorrencia,
+        LocalDate dataOcorrencia,
 
         @NotNull(message = "Data de vencimento é obrigatória")
         @Future(message = "Data de vencimento deve ser no futuro")
-        LocalDateTime dataVencimento,
+        LocalDate dataVencimento,
 
         @NotBlank(message = "Status é obrigatório")
         @Pattern(regexp = "^(aberta|paga|vencida)$", message = "Status deve ser 'aberta', 'paga' ou 'vencida'")

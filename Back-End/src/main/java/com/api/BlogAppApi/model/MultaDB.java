@@ -2,7 +2,7 @@ package com.api.BlogAppApi.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "multa") // você pode ajustar o nome conforme desejar
@@ -24,10 +24,10 @@ public class  MultaDB{
     private BigDecimal valor;
 
     @Column(nullable = false)
-    private LocalDateTime dataOcorrencia;
+    private LocalDate dataOcorrencia;
 
     @Column(nullable = false)
-    private LocalDateTime dataVencimento;
+    private LocalDate dataVencimento;
 
     @Column(nullable = false, length = 20)
     private String status; // PENDENTE, PAGA, CONTESTADA, CANCELADA
@@ -45,14 +45,14 @@ public class  MultaDB{
     private String registradoPor;
 
     @Column
-    private LocalDateTime dataPagamento;
+    private LocalDate dataPagamento;
 
     @Column(length = 255)
     private String comprovantePagamento;
 
     public void pagarMulta(String comprovante) {
         this.status = "PAGA";
-        this.dataPagamento = LocalDateTime.now();
+        this.dataPagamento = LocalDate.now();
         this.comprovantePagamento = comprovante;
     }
 
@@ -98,19 +98,19 @@ public class  MultaDB{
         this.valor = valor;
     }
 
-    public LocalDateTime getDataOcorrencia() {
+    public LocalDate getDataOcorrencia() {
         return dataOcorrencia;
     }
 
-    public void setDataOcorrencia(LocalDateTime dataOcorrencia) {
+    public void setDataOcorrencia(LocalDate dataOcorrencia) {
         this.dataOcorrencia = dataOcorrencia;
     }
 
-    public LocalDateTime getDataVencimento() {
+    public LocalDate getDataVencimento() {
         return dataVencimento;
     }
 
-    public void setDataVencimento(LocalDateTime dataVencimento) {
+    public void setDataVencimento(LocalDate dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
 
@@ -154,11 +154,11 @@ public class  MultaDB{
         this.registradoPor = registradoPor;
     }
 
-    public LocalDateTime getDataPagamento() {
+    public LocalDate getDataPagamento() {
         return dataPagamento;
     }
 
-    public void setDataPagamento(LocalDateTime dataPagamento) {
+    public void setDataPagamento(LocalDate dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 

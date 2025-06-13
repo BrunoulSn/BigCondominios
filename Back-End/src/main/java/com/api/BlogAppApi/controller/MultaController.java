@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -55,21 +56,27 @@ public class MultaController {
             multa.setDescricao(dto.descricao());
             multa.setValor(dto.valor());
             multa.setDataOcorrencia(dto.dataOcorrencia());
-            multa.setDataVencimento(dto.dataVencimento());
+            multa.setDataVencimento(dto.dataVencimento()); // ← conversão aqui
             multa.setStatus(dto.status());
             multa.setGravidade(dto.gravidade());
             return ResponseEntity.ok(multaService.save(multa));
         }).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+
     @PutMapping("/{id}/status")
     public ResponseEntity<?> atualizarStatus(@PathVariable Long id, @RequestBody @Valid AtualizarStatusDTO dto) {
         return multaService.findById(id).map(multa -> {
             multa.setStatus(dto.status());
+
+            // ✅ Atualiza a data de pagamento se for paga
+            if ("paga".equalsIgnoreCase(dto.status())) {
+                multa.setDataPagamento(LocalDate.now());
+            }
+
             multaService.save(multa);
             return ResponseEntity.ok().build();
         }).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Multa não encontrada"));
     }
-
 
     @DeleteMapping("/{id}")
     public Object deleteMulta(@PathVariable long id) {

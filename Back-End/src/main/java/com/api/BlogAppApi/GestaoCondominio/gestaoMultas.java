@@ -6,6 +6,7 @@ import com.api.BlogAppApi.model.MultaDB;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +42,8 @@ public class gestaoMultas {
 
     public List<MultaDB> listarMultasVencidas() {
         return multas.stream()
-                .filter(m -> "PENDENTE".equals(m.getStatus()))
-                .filter(m -> m.getDataVencimento().isBefore(LocalDateTime.now()))
+                .filter(m -> "PENDENTE".equalsIgnoreCase(m.getStatus()))
+                .filter(m -> m.getDataVencimento().isBefore(LocalDate.now()))
                 .collect(Collectors.toList());
     }
 
