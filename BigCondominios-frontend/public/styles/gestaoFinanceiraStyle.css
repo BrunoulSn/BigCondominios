@@ -57,4 +57,19 @@
             border-radius: 8px;
             border: 1px solid #ccc;
             min-width: 200px;
-        }
+}
+
+#notificacaoSucesso {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #4caf50;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  font-size: 18px;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}

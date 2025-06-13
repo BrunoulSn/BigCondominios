@@ -1,8 +1,10 @@
 
 package com.api.BlogAppApi.controller;
 
+import com.api.BlogAppApi.DTOs.AtualizarStatusDTO;
 import com.api.BlogAppApi.DTOs.MultaDTO;
 import com.api.BlogAppApi.model.MultaDB;
+import com.api.BlogAppApi.model.moradorDB;
 import com.api.BlogAppApi.service.MultaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -39,8 +41,13 @@ public class MultaController {
     public ResponseEntity<Object> saveNewMulta(@RequestBody @Valid MultaDTO dto) {
         var multa = new MultaDB();
         BeanUtils.copyProperties(dto, multa);
+        var morador = new moradorDB();
+        morador.setId(dto.moradorId());
+        multa.setMorador(morador);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(multaService.save(multa));
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<MultaDB> editarMulta(@PathVariable Long id, @RequestBody MultaDTO dto) {
@@ -54,6 +61,15 @@ public class MultaController {
             return ResponseEntity.ok(multaService.save(multa));
         }).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
+    @PutMapping("/{id}/status")
+    public ResponseEntity<?> atualizarStatus(@PathVariable Long id, @RequestBody @Valid AtualizarStatusDTO dto) {
+        return multaService.findById(id).map(multa -> {
+            multa.setStatus(dto.status());
+            multaService.save(multa);
+            return ResponseEntity.ok().build();
+        }).orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Multa não encontrada"));
+    }
+
 
     @DeleteMapping("/{id}")
     public Object deleteMulta(@PathVariable long id) {

@@ -5,70 +5,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Multas - BigCondomínios</title>
-     <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/gestaoMultaStyle.css" />
+    <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/gestaoMultaStyle.css" />
     <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 </head>
 
 <body>
-  <main class="content">
-    <header id="navbar"></header>
+    <main class="content">
+        <header id="navbar"></header>
+    
     <script>
         fetch('/BigCondominios-frontend/src/pages/navbar.html')
             .then(response => response.text())
             .then(data => document.getElementById('navbar').innerHTML = data);
     </script>
-        <!-- Seção de Gestão de Multas -->
-       <section class="secaoMultas">
-    <h2>Gestão de Multas</h2>
-    <div class="tabelaResponsiva">
-        <section class="formularioMulta">
-    <h3>Adicionar Nova Multa</h3>
-    <form id="formMulta">
-        <label for="morador">Morador:</label>
-        <select id="morador" required></select>
+        <section class="secaoMultas">
+            <h2>Gestão de Multas</h2>
+            <div class="tabelaResponsiva">
+                <div class="formularioMulta">
+                    <h3>Registrar Multa</h3>
+                    <form id="formMulta">
+                        <label for="morador">Morador:</label>
+                        <select id="morador" required></select>
 
-        <label for="valor">Valor (R$):</label>
-        <input type="number" id="valor" step="0.01" min="0.01" required>
+                        <label for="valor">Valor:</label>
+                        <input type="number" id="valor" required step="0.01" min="0.01" />
 
-        <label for="dataVencimento">Data de Vencimento:</label>
-        <input type="date" id="dataVencimento" required>
+                        <label for="dataVencimento">Data de Vencimento:</label>
+                        <input type="date" id="dataVencimento" required />
 
-        <label for="status">Status:</label>
-        <select id="status">
-            <option value="PENDENTE" selected>PENDENTE</option>
-            <option value="PAGA">PAGA</option>
-            <option value="CONTESTADA">CONTESTADA</option>
-            <option value="CANCELADA">CANCELADA</option>
-        </select>
+                        <label for="status">Status:</label>
+                        <select id="status" required>
+                            <option value="aberta">Aberta</option>
+                            <option value="paga">Paga</option>
+                            <option value="vencida">Vencida</option>
+                        </select>
 
-        <div class="botoesFormulario">
-            <button type="submit" class="btnAcao adicionar">Adicionar</button>
-            <button type="button" class="btnAcao cancelar" onclick="limparFormulario()">Cancelar</button>
-        </div>
-    </form>
-</section>
+                        <label for="descricao">Descrição:</label>
+<input type="text" id="descricao" maxlength="255" required />
 
-        <table class="tabelaMultas">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Morador</th>
-                    <th>Valor</th>
-                    <th>Status</th>
-                    <th>Vencimento</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id="tabelaMultasBody">
-                <!-- Dados preenchidos via JS -->
-            </tbody>
-        </table>
-    </div>
-</section>
+<label for="gravidade">Gravidade:</label>
+<select id="gravidade" required>
+    <option value="leve">Leve</option>
+    <option value="moderada">Moderada</option>
+    <option value="grave">Grave</option>
+</select>
 
+                        <div class="botoesFormulario">
+                            <button type="submit" class="btnAcao adicionar">Adicionar Multa</button>
+                        </div>
+                    </form>
+                </div>
+
+                <table class="tabelaMultas">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Morador</th>
+                            <th>Valor</th>
+                            <th>Status</th>
+                            <th>Vencimento</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaMultasBody">
+                       
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </main>
+    <script src="/BigCondominios-frontend/src/controllers/gestaoMultasController.js"></script>
 </body>
-<script src="/BigCondominios-frontend/src/controllers/gestaoMultasController.js"></script>
 </html>
