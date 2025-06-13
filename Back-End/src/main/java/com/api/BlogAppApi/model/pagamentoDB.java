@@ -2,7 +2,7 @@ package com.api.BlogAppApi.model;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 public class pagamentoDB {
@@ -18,7 +18,7 @@ public class pagamentoDB {
     @Column(nullable = false)
     private BigDecimal valor;
 
-    private LocalDateTime dataPagamento;
+    private LocalDate dataPagamento;
 
     @Column(nullable = false)
     private String tipo;
@@ -42,7 +42,7 @@ public class pagamentoDB {
 
     public void registrarPagamento(String formaPagamento) {
         this.formaPagamento = formaPagamento;
-        this.dataPagamento = LocalDateTime.now();
+        this.dataPagamento = LocalDate.now();
         this.status = "PAGO";
     }
 
@@ -72,11 +72,11 @@ public class pagamentoDB {
         this.valor = valor;
     }
 
-    public LocalDateTime getDataPagamento() {
+    public LocalDate getDataPagamento() {
         return dataPagamento;
     }
 
-    public void setDataPagamento(LocalDateTime dataPagamento) {
+    public void setDataPagamento(LocalDate dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 

@@ -38,7 +38,21 @@ public class PagamentoController {
     @PostMapping
     public ResponseEntity<Object> saveNewPagamento(@RequestBody @Valid PagamentoDTO dto) {
         var pagamento = new pagamentoDB();
-        BeanUtils.copyProperties(dto, pagamento);
+
+        // Buscar o morador pelo ID informado no DTO
+        var moradorOpt = pagamentoService.buscarMoradorPorId(dto.moradorId());
+        if (moradorOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("Morador não encontrado para o ID: " + dto.moradorId());
+        }
+
+        pagamento.setMorador(moradorOpt.get());
+        pagamento.setValor(dto.valor());
+        pagamento.setDataPagamento(dto.dataPagamento());
+        pagamento.setTipo(dto.tipo());
+        pagamento.setStatus(dto.status());
+        pagamento.setFormaPagamento(dto.formaPagamento());
+
         return ResponseEntity.status(HttpStatus.CREATED).body(pagamentoService.save(pagamento));
     }
 

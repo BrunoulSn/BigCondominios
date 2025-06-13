@@ -1,5 +1,6 @@
 package com.api.BlogAppApi.service;
 
+import com.api.BlogAppApi.model.moradorDB;
 import com.api.BlogAppApi.model.pagamentoDB;
 import com.api.BlogAppApi.repository.pagamentoDBRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,4 +33,12 @@ public class PagamentoService {
     public void delete(pagamentoDB pagamento) {
         pagamentoDBRepository.delete(pagamento);
     }
+
+    @Autowired
+    private com.api.BlogAppApi.repository.moradorDBRepository moradorDBRepository;
+
+    public Optional<moradorDB> buscarMoradorPorId(Long id) {
+        return moradorDBRepository.findById(id);
+    }
+
 }

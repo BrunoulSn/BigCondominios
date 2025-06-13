@@ -1,6 +1,10 @@
-document.addEventListener("DOMContentLoaded", listarPagamentos);
+document.addEventListener("DOMContentLoaded", () => {
+  carregarMoradores();
+  //listarPagamentos();
+});
 
-function listarPagamentos() {
+
+/*function listarPagamentos() {
     fetch("http://localhost:8080/api/pagamentos")
     .then(res => res.json())
     .then(pagamentos => {
@@ -18,75 +22,64 @@ function listarPagamentos() {
         tbody.appendChild(tr);
         });
     });
-}
+}*/
 
 function registrarPagamento() {
-    const nome = document.getElementById("moradorSelect").value;
+    const moradorId = document.getElementById("moradorSelect").value;
     const valorStr = document.getElementById("valorPagamento").value;
     const valor = parseFloat(valorStr.replace(",", "."));
     const data = document.getElementById("dataPagamento").value;
 
-    // Nome obrigatório e mínimo de 3 caracteres
-    if (!nome || nome.length < 3) {
-        alert("Informe o nome do morador (mínimo 3 letras).");
+    if (!moradorId) {
+        alert("Selecione um morador.");
         return;
     }
 
-    // Valor obrigatório, numérico e positivo
     if (!valorStr || isNaN(valor) || valor <= 0) {
         alert("Informe um valor válido e maior que zero.");
         return;
     }
 
-    // Data obrigatória e válida
     if (!data) {
         alert("Informe a data do pagamento.");
         return;
     }
+
     const dataPag = new Date(data);
-    if (isNaN(dataPag.getTime())) {
-        alert("Data inválida.");
-        return;
-    }
-    // Não permitir datas futuras
     const hoje = new Date();
-    hoje.setHours(0,0,0,0);
-    if (dataPag > hoje) {
-        alert("A data do pagamento não pode ser futura.");
+    hoje.setHours(0, 0, 0, 0);
+
+    if (isNaN(dataPag.getTime()) || dataPag > hoje) {
+        alert("Data inválida ou no futuro.");
         return;
     }
 
     const pagamento = {
-        morador: nome,
+        moradorId: parseInt(moradorId),
         valor: valor,
-        data: data
+        dataPagamento: data,           // ← LocalDate no formato "YYYY-MM-DD"
+        tipo: "condominio",           // ← fixo para esta aba
+        status: "automatico",                // ← fixo
+        formaPagamento: "dinheiro"     // ← fixo
     };
 
-    fetch("http://localhost:8080/api/pagamentos", {
+    fetch("http://localhost:8080/pagamentos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(pagamento)
-    }).then(() => listarPagamentos());
+    })//.then(() => listarPagamentos());
 }
 
-function handleMoradorSelectClick() {
-    const select = document.getElementById("moradorSelect");
-
-    // Evita repopular se já tem mais de 1 opção (1 é o "Selecione um morador")
-    if (select.options.length > 1) return;
-
-    fetch("http://localhost:8080/api/morador")
-        .then(res => res.json())
-        .then(moradores => {
-            moradores.forEach(m => {
-                const option = document.createElement("option");
-                option.value = m.nome; // ou m.id se preferir trabalhar com IDs
-                option.textContent = m.nome;
-                select.appendChild(option);
-            });
-        })
-        .catch(err => {
-            console.error("Erro ao buscar moradores:", err);
-            alert("Não foi possível carregar os moradores.");
-        });
+function carregarMoradores() {
+  fetch("http://localhost:8080/morador")
+    .then(res => res.json())
+    .then(moradores => {
+      const select = document.getElementById("moradorSelect");
+      moradores.forEach(m => {
+        const opt = document.createElement("option");
+        opt.value = m.id;
+        opt.textContent = `${m.nome} - Bloco ${m.bloco}, Apto ${m.apartamento}`;
+        select.appendChild(opt);
+      });
+    });
 }

@@ -3,7 +3,7 @@ package com.api.BlogAppApi.DTOs;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public record PagamentoDTO(
         Long id,
@@ -16,16 +16,16 @@ public record PagamentoDTO(
         BigDecimal valor,
 
         @PastOrPresent(message = "Data de pagamento não pode ser futura")
-        LocalDateTime dataPagamento,
+        LocalDate dataPagamento,
 
         @NotBlank(message = "Tipo de pagamento é obrigatório")
-        @Pattern(regexp = "^(multa|mensalidade|outro)$", message = "Tipo deve ser 'multa', 'mensalidade' ou 'outro'")
+        @Pattern(regexp = "^(multa|condominio|outros)$", message = "Tipo deve ser 'multa', 'condominio' ou 'outros'")
         String tipo,
 
         @NotBlank(message = "Status é obrigatório")
-        @Pattern(regexp = "^(pago|pendente|cancelado)$", message = "Status deve ser 'pago', 'pendente' ou 'cancelado'")
+        @Pattern(regexp = "^(pago|pendente|cancelado|automatico)$", message = "Status deve ser 'pago', 'pendente', 'automatico' ou 'cancelado'")
         String status,
 
-        @Pattern(regexp = "^(boleto|pix|cartao|dinheiro)?$", message = "Forma de pagamento deve ser 'boleto', 'pix', 'cartao' ou 'dinheiro'")
+        @Pattern(regexp = "^(boleto|pix|cartao|dinheiro)?$", message = "Forma de pagamento deve ser 'boleto', 'pix', 'cartao', 'automatica' ou 'dinheiro'")
         String formaPagamento
 ) {}
