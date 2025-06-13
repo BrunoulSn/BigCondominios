@@ -4,32 +4,43 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function listarPagamentos() {
-    fetch("http://localhost:8080/pagamentos")
+    fetch("http://localhost:8080/pagamentos/completo")
         .then(res => {
-            if (!res.ok) throw new Error("Erro ao buscar pagamentos");
+            if (!res.ok) throw new Error("Erro ao buscar dados");
             return res.json();
         })
-        .then(pagamentos => {
+        .then(data => {
             const tbody = document.getElementById("corpoTabelaPagamentos");
             tbody.innerHTML = "";
 
-            pagamentos.forEach(p => {
+            // Juntar pagamentos + multas pagas em um único array
+            const todos = [
+                ...data.pagamentos.map(p => ({
+                    morador: p.morador,
+                    valor: p.valor,
+                    dataPagamento: p.dataPagamento,
+                })),
+                ...data.multasPagas.map(m => ({
+                    morador: m.morador,
+                    valor: m.valor,
+                    dataPagamento: m.dataPagamento,
+                }))
+            ];
+
+            // Exibir todos os registros juntos
+            todos.forEach(p => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-                    <td>${p.id}</td>
                     <td>${p.morador.nome} - Bloco ${p.morador.bloco}, Apto ${p.morador.apartamento}</td>
                     <td>R$ ${parseFloat(p.valor).toFixed(2)}</td>
                     <td>${p.dataPagamento ? new Date(p.dataPagamento).toLocaleDateString("pt-BR") : "-"}</td>
-                    <td>${p.tipo}</td>
-                    <td>${p.status}</td>
-                    <td>${p.formaPagamento || "-"}</td>
                 `;
                 tbody.appendChild(tr);
             });
         })
         .catch(err => {
-            console.error("Erro ao carregar pagamentos:", err);
-            alert("Erro ao carregar pagamentos. Verifique o console.");
+            console.error("Erro ao carregar dados:", err);
+            alert("Erro ao carregar dados.");
         });
 }
 

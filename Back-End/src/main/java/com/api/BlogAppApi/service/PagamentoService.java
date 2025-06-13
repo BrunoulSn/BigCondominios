@@ -1,5 +1,9 @@
 package com.api.BlogAppApi.service;
 
+import com.api.BlogAppApi.DTOs.PagamentoMultaResponseDTO;
+import com.api.BlogAppApi.DTOs.PagamentoMultaResponseDTO;
+import com.api.BlogAppApi.repository.MultaDBRepository;
+import com.api.BlogAppApi.model.MultaDB;
 import com.api.BlogAppApi.model.moradorDB;
 import com.api.BlogAppApi.model.pagamentoDB;
 import com.api.BlogAppApi.repository.pagamentoDBRepository;
@@ -39,6 +43,16 @@ public class PagamentoService {
 
     public Optional<moradorDB> buscarMoradorPorId(Long id) {
         return moradorDBRepository.findById(id);
+    }
+
+    @Autowired
+    private MultaDBRepository multaDBRepository;
+
+    public PagamentoMultaResponseDTO buscarPagamentosEAsMultasPagas() {
+        List<pagamentoDB> pagamentos = pagamentoDBRepository.findAll();
+        List<MultaDB> multasPagas = multaDBRepository.findByStatus("paga");
+
+        return new PagamentoMultaResponseDTO(pagamentos, multasPagas);
     }
 
 }

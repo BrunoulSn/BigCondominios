@@ -2,6 +2,7 @@
 package com.api.BlogAppApi.controller;
 
 import com.api.BlogAppApi.DTOs.PagamentoDTO;
+import com.api.BlogAppApi.DTOs.PagamentoMultaResponseDTO;
 import com.api.BlogAppApi.model.pagamentoDB;
 import com.api.BlogAppApi.service.PagamentoService;
 import jakarta.validation.Valid;
@@ -74,5 +75,11 @@ public class PagamentoController {
             pagamentoService.delete(pagamento);
             return ResponseEntity.ok("Pagamento deletado com sucesso");
         }).orElse(ResponseEntity.status(HttpStatus.NO_CONTENT).body("Pagamento não encontrado"));
+    }
+
+    @GetMapping("/completo")
+    public ResponseEntity<PagamentoMultaResponseDTO> getPagamentosEAsMultasPagas() {
+        var resposta = pagamentoService.buscarPagamentosEAsMultasPagas();
+        return ResponseEntity.ok(resposta);
     }
 }
