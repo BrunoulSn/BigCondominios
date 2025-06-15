@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   listarPagamentos();
 });
 
+let chartInstance = null;
+
 function listarPagamentos() {
     fetch("http://localhost:8080/pagamentos/completo")
         .then(res => {
@@ -36,6 +38,52 @@ function listarPagamentos() {
                     <td>${p.dataPagamento ? new Date(p.dataPagamento).toLocaleDateString("pt-BR") : "-"}</td>
                 `;
                 tbody.appendChild(tr);
+            });
+
+            // --- DASHBOARD ---
+            // Agrupar valores por mês/ano
+            const porMes = {};
+            todos.forEach(p => {
+                if (!p.dataPagamento) return;
+                const data = new Date(p.dataPagamento);
+                const mesAno = `${data.getMonth() + 1}/${data.getFullYear()}`;
+                porMes[mesAno] = (porMes[mesAno] || 0) + parseFloat(p.valor);
+            });
+
+            // Ordenar meses
+            const labels = Object.keys(porMes).sort((a, b) => {
+                const [ma, aa] = a.split('/').map(Number);
+                const [mb, ab] = b.split('/').map(Number);
+                return ab !== aa ? aa - ab : ma - mb;
+            });
+            const valores = labels.map(l => porMes[l]);
+
+            // Renderizar gráfico
+            const ctx = document.getElementById('graficoFinanceiro').getContext('2d');
+            if (chartInstance) chartInstance.destroy();
+            chartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Recebido no mês (R$)',
+                        data: valores,
+                        backgroundColor: '#4f8cff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: v => 'R$ ' + v }
+                        }
+                    }
+                }
             });
         })
         .catch(err => {
