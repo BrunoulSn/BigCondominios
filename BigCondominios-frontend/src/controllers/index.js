@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     listarPagamentos();
     carregarReservasFuturas();
+    
+  function toggleMenu() {
+    document.getElementById("menuLinks").classList.toggle("open");
+  }
+
 });
 
 let chartInstance = null;
