@@ -53,10 +53,15 @@ public class MoradorService {
         return moradorDBRepository.save(morador);
     }
 
-    @Transactional
-    public void delete(moradorDB morador) {
-        moradorDBRepository.delete(morador);
-    }
+ 
+@Transactional
+public void delete(moradorDB morador) {
+    morador.getMultas().clear();
+    morador.getHistoricoVisitas().clear();
+
+    moradorDBRepository.save(morador); // aplica a remoção dos filhos
+    moradorDBRepository.delete(morador);
+}
 
 
 }

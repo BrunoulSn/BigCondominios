@@ -5,10 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestão Financeira - BigCondomínios</title>
-  <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/gestaoFinanceiraStyle.css" />
-  <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/index.css">
+  <link rel="stylesheet" href="/public/styles/gestaoFinanceiraStyle.css" />
+  <link rel="stylesheet" href="/public/styles/index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  <link rel="stylesheet" href="/public/styles/scroll.css">
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 
 <body>
@@ -17,7 +21,7 @@
         <header id="navbar"></header>
     
     <script>
-        fetch('/BigCondominios-frontend/src/pages/navbar.html')
+        fetch('/src/pages/navbar.html')
             .then(response => response.text())
             .then(data => document.getElementById('navbar').innerHTML = data);
     </script>
@@ -42,7 +46,7 @@
             <th>Data</th>
           </tr>
         </thead>
-        <tbody id="corpoTabelaPagamentos">
+        <tbody id="corpoTabelaPagamentos" class="scrollable">
           <!-- Preenchido via JavaScript -->
         </tbody>
       </table>
@@ -55,8 +59,8 @@
   </main>
   <div id="notificacaoSucesso">Pagamento registrado com sucesso!</div>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="/BigCondominios-frontend/src/controllers/gestaoFinanceiraController.js"></script>
-  <script src="/BigCondominios-frontend/src/controllers/navbar.js"></script>
+  <script src="/src/controllers/gestaoFinanceiraController.js"></script>
+  <script src="/src/controllers/navbar.js"></script>
 </body>
 
 </html>

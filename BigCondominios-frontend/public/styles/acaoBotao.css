@@ -1,0 +1,13 @@
+.acaoGestao{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.lixo{
+    color: red;
+}
+
+.engrenagem, .lixo{
+padding: 4px;
+cursor: pointer;
+}

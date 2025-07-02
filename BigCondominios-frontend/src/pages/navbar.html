@@ -7,40 +7,60 @@
   <div class="menuLinks" id="menuLinks">
 
     <div class="logoNavbar">
-      <a href="/BigCondominios-frontend/src/pages/index.html">
-        <img src="/BigCondominios-frontend/assets/logoApp.png" alt="Logo">
+      <a href="/src/pages/index.html">
+        <img src="/assets/logoApp.png" alt="Logo">
+        <p style="color: #007bff;">BIGCONDOMINIOS</p>
       </a>
     </div>
 
-    <a href="/BigCondominios-frontend/src/pages/gestaoMorador.html">
+    <a href="/src/pages/gestaoMorador.html">
       <div class="opcaoClicavel">
         <i class="fas fa-users"></i>
         <p>Gestão de Moradores</p>
       </div>
     </a>
-    <a href="/BigCondominios-frontend/src/pages/agendamentoArea.html">
+    <a href="/src/pages/agendamentoArea.html">
       <div class="opcaoClicavel">
         <i class="fa-solid fa-calendar-days"></i>
         <p>Agendamento de Áreas</p>
       </div>
     </a>
-    <a href="/BigCondominios-frontend/src/pages/gestaoFinanceira.html">
+    <a href="/src/pages/gestaoFinanceira.html">
       <div class="opcaoClicavel">
         <i class="fas fa-file-invoice-dollar"></i>
         <p>Gestão Financeira</p>
       </div>
     </a>
-    <a href="/BigCondominios-frontend/src/pages/gestaoMulta.html">
+    <a href="/src/pages/gestaoMulta.html">
       <div class="opcaoClicavel">
         <i class="fas fa-gavel"></i>
         <p>Gestão de Multas</p>
       </div>
     </a>
-    <a href="/BigCondominios-frontend/src/pages/cadastro.html">
+    <a href="/src/pages/cadastro.html">
       <div class="opcaoClicavel">
         <i class="fa-solid fa-user"></i>
         <p>Cadastrar Morador</p>
       </div>
     </a>
+    <div class="opcaoClicavel minhaConta" id="minhaConta">
+      <img src="/assets/perfilUsuario.jfif" alt="Foto do Usuário">
+      <select id="menu" name="Minha Conta" onchange="navegar()">
+        <option>Minha Conta</option>
+        <option value="/src/pages/cadastroAdm.html" class="background-color: transparent;">Cadastrar Adm</option>
+        <option value="/src/pages/login.html" class="background-color: transparent;">Logout</option>
+      </select>
+    </div>
+
   </div>
 </div>
+<script>
+  function navegar() {
+    const menu = document.getElementById("menu");
+    const escolha = menu.value;
+
+    if (escolha) {
+      location.replace(escolha); // Redireciona para a página selecionada
+    }
+  }
+</script>

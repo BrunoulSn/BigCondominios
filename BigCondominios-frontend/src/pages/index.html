@@ -5,8 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BIGCONDOMÍNIOS</title>
-    <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/index.css">
+    <link rel="stylesheet" href="/public/styles/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 
 <body>
@@ -14,7 +21,7 @@
         <header id="navbar"></header>
 
         <script>
-            fetch('/BigCondominios-frontend/src/pages/navbar.html')
+            fetch('/src/pages/navbar.html')
                 .then(response => response.text())
                 .then(data => document.getElementById('navbar').innerHTML = data);
         </script>
@@ -32,14 +39,19 @@
 
             <!-- Dashboard Financeiro -->
             <div class="dashboardFinanceiro" style="flex: 1; min-width: 300px; max-width: 600px;">
-                <h2 style="text-align: center;">Dashboard Financeiro</h2>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 10px;">
+                <h2 style="margin: 0;">Dashboard Financeiro</h2>
+                <button onclick="exportarPDF()" style="padding: 5px 10px; font-size: 14px; cursor: pointer;">
+                    📄 Exportar PDF
+                </button>
+                </div>
                 <canvas id="graficoFinanceiro"></canvas>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="/BigCondominios-frontend/src/controllers/index.js"></script>
-    <script src="/BigCondominios-frontend/src/controllers/navbar.js"></script>
+    <script src="/src/controllers/index.js"></script>
+    <script src="/src/controllers/navbar.js"></script>
 </body>
 
 </html>

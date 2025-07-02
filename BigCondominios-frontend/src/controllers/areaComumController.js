@@ -4,6 +4,10 @@ document.addEventListener("DOMContentLoaded", () => {
   listarReservas();
 });
 
+const username = "admin";
+const password = "123456";
+const basicAuth = btoa(`${username}:${password}`);
+
 //Validações
 function validarDataReserva() {
     const input = document.getElementById("dataReserva");
@@ -45,7 +49,13 @@ function validarDataReserva() {
 }
 
 function carregarAreas() {
-    fetch("http://localhost:8080/area-comum")
+    fetch("https://back-endbigcondominios-production.up.railway.app/area-comum",{
+
+        method: "GET",
+        headers: {
+            "Authorization": `Basic ${basicAuth}`
+        }
+    })
         .then(res => res.json())
         .then(areas => {
             const select = document.getElementById("areaSelect");
@@ -59,7 +69,13 @@ function carregarAreas() {
 }
 
 function listarReservas() {
-    fetch("http://localhost:8080/reservas/futuras")
+    fetch("https://back-endbigcondominios-production.up.railway.app/reservas/futuras",{
+
+        method: "GET",
+        headers: {
+            "Authorization": `Basic ${basicAuth}`
+        }
+    })
         .then(res => res.json())
         .then(reservas => {
             const tbody = document.getElementById("corpoTabelaReservas");
@@ -106,9 +122,11 @@ function fazerReserva() {
     data: dataReserva
   };
 
-  fetch("http://localhost:8080/reservas", {
+  fetch("https://back-endbigcondominios-production.up.railway.app/reservas", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json",
+      "Authorization": `Basic ${basicAuth}`
+     },
     body: JSON.stringify(body)
   }).then(() => listarReservas());
 }
@@ -116,7 +134,7 @@ function fazerReserva() {
 function cancelarReserva(id) {
     if (!confirm("Deseja realmente cancelar esta reserva?")) return;
 
-    fetch(`http://localhost:8080/reservas/${id}`, {
+    fetch(`https://back-endbigcondominios-production.up.railway.app/reservas/${id}`, {
         method: "DELETE"
     })
     .then(response => {
@@ -132,7 +150,13 @@ function cancelarReserva(id) {
 }
 
 function carregarMoradores() {
-  fetch("http://localhost:8080/morador")
+  fetch("https://back-endbigcondominios-production.up.railway.app/morador",{
+
+        method: "GET",
+        headers: {
+            "Authorization": `Basic ${basicAuth}`
+        }
+    })
     .then(res => res.json())
     .then(moradores => {
       const select = document.getElementById("moradorSelect");

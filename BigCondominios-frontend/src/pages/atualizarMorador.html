@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BIGCONDOMÍNIOS - Atualizar Morador</title>
+    <link rel="stylesheet" href="/public/styles/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e3f0ff 0%, #b6cfff 100%);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .content {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cadastro-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .cadastro-box {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            padding: 40px 32px 32px 32px;
+            max-width: 400px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .top-image {
+            width: 80px;
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #003eb3;
+            margin-bottom: 24px;
+            font-weight: 700;
+        }
+
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #b6cfff;
+            border-radius: 8px;
+            font-size: 1em;
+            background: #f7faff;
+            transition: border 0.2s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="tel"]:focus {
+            border: 1.5px solid #003eb3;
+            outline: none;
+            background: #fff;
+        }
+
+        .divisorInput {
+            display: flex;
+            gap: 10px;
+        }
+
+        .divisorInput input {
+            flex: 1;
+        }
+
+        .cadastro-button {
+            margin-top: 10px;
+            padding: 12px;
+            background: blue;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+        }
+
+        .cadastro-button:hover {
+            background: rgb(13, 74, 124)
+        }
+
+        .signup-redirect {
+            margin-top: 20px;
+            font-size: 0.95em;
+            color: #555;
+            text-align: center;
+        }
+
+        @media (max-width: 500px) {
+            .cadastro-box {
+                padding: 24px 8px;
+            }
+        }
+    </style>
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
+</head>
+
+<body>
+    <div class="content">
+        <header id="navbar"></header>
+        <script>
+            fetch('/src/pages/navbar.html')
+                .then(response => response.text())
+                .then(data => document.getElementById('navbar').innerHTML = data);
+        </script>
+
+        <div class="cadastro-container">
+            <div class="cadastro-box">
+                <img src="/assets/logoApp.png" alt="Imagem de Prédio" class="top-image" />
+                <h1>Atualizar Morador</h1>
+                <form id="formAtualizar">
+                    <input type="text" id="nomeMorador" placeholder="Nome completo" required />
+                    <input type="text" id="cpfMorador" placeholder="CPF" disabled />
+                    <input type="email" id="email" placeholder="E-mail" required />
+                    <input type="password" id="senha" placeholder="Nova senha (deixe em branco para não alterar)" />
+                    <div class="divisorInput">
+                        <input type="text" id="apartamentoMorador" placeholder="Apartamento" required />
+                        <input type="text" id="blocoMorador" placeholder="Bloco" required />
+                    </div>
+                    <input type="tel" id="telefone" placeholder="Telefone" required />
+
+                    <button type="submit" class="cadastro-button" id="btnAtualizar">Atualizar</button>
+                    <div class="signup-redirect"
+                        style="margin-top: 20px; font-size: 0.95em; color: #555; text-align: center;">
+                        Voltar para <a href="/src/pages/gestaoMoradores.html"
+                            style="color: #7b1fa2; text-decoration: none; font-weight: 600;">Gestão de Moradores</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/src/controllers/atualizarMorador.js"></script>
+    <script src="/src/controllers/navbar.js"></script>
+</body>
+
+</html>

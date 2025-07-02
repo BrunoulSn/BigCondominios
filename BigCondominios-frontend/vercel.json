@@ -1,0 +1,30 @@
+{
+  "builds": [
+    {
+      "src": "src/pages/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "src/controllers/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "public/styles/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "assets/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "src/pages/cadastro.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "src/pages/$1"
+    }
+  ]
+}

@@ -14,7 +14,7 @@ public class  MultaDB{
     private Long id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "morador_id")
+    @JoinColumn(name = "morador_id", nullable = false)
     private moradorDB morador;
 
     @Column(nullable = false, length = 255)

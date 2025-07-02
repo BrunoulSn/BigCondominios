@@ -5,44 +5,54 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gestão de Moradores - BigCondomínios</title>
-  <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/gestaoMoradorStyle.css"/>
-  <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/index.css">
+  <link rel="stylesheet" href="/public/styles/gestaoMoradorStyle.css" />
+  <link rel="stylesheet" href="/public/styles/index.css">
+  <link rel="stylesheet" href="/public/styles/acaoBotao.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/public/styles/scroll.css">
+  <script>
+    window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/speed-insights/script.js"></script>
 
 </head>
 
 <body>
   <main class="content">
 
-        <header id="navbar"></header>
-    
+    <header id="navbar"></header>
+
     <script>
-        fetch('/BigCondominios-frontend/src/pages/navbar.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('navbar').innerHTML = data);
+      fetch('/src/pages/navbar.html')
+        .then(response => response.text())
+        .then(data => document.getElementById('navbar').innerHTML = data);
     </script>
 
     <!-- Seção de Gestão de Moradores -->
     <section class="secaoMoradores">
-      <h2>Moradores Cadastrados</h2>
-      <table class="tabelaMoradores">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Bloco</th>
-            <th>Apartamento</th>
-            <th>Telefone</th>
-          </tr>
-        </thead>
-        <tbody id="corpoTabelaMoradores">
-          <!-- Conteúdo preenchido via JS -->
-        </tbody>
+  <h2>Moradores Cadastrados</h2>
+  <div class="tabelaContainer">
+    <table class="tabelaMoradores">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Bloco</th>
+          <th>Apartamento</th>
+          <th>Telefone</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="corpoTabelaMoradores" class="scrollable">
+        <!-- Conteúdo preenchido via JS -->
+
+      </tbody>
       </table>
     </section>
   </main>
-  <script src="/BigCondominios-frontend/src/controllers/gestaoMoradoresController.js"></script>
-  <script src="/BigCondominios-frontend/src/controllers/navbar.js"></script>
+  <script src="/src/controllers/cadastro.js"></script>
+  <script src="/src/controllers/gestaoMoradoresController.js"></script>
+  <script src="/src/controllers/navbar.js"></script>
 </body>
 
 </html>

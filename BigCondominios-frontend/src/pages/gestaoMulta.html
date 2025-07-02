@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Multas - BigCondomínios</title>
-    <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/gestaoMultaStyle.css" />
-    <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/index.css">
+    <link rel="stylesheet" href="/public/styles/gestaoMultaStyle.css" />
+    <link rel="stylesheet" href="/public/styles/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 
 <body>
@@ -15,7 +19,7 @@
         <header id="navbar"></header>
     
     <script>
-        fetch('/BigCondominios-frontend/src/pages/navbar.html')
+        fetch('/src/pages/navbar.html')
             .then(response => response.text())
             .then(data => document.getElementById('navbar').innerHTML = data);
     </script>
@@ -75,7 +79,7 @@
             </div>
         </section>
     </main>
-    <script src="/BigCondominios-frontend/src/controllers/gestaoMultasController.js"></script>
-    <script src="/BigCondominios-frontend/src/controllers/navbar.js"></script>
+    <script src="/src/controllers/gestaoMultasController.js"></script>
+    <script src="/src/controllers/navbar.js"></script>
 </body>
 </html>

@@ -21,7 +21,7 @@ body {
 } 
 
 .top-image {
-  width: 100%;
+  width: 70%;
   max-height: 150px;
   object-fit: cover;
   margin-bottom: 20px;
@@ -32,11 +32,11 @@ h1 {
   color: #333;
 }
 
-input[type="email"],
+input[type="text"],
 input[type="password"] {
   width: 95%;
   padding: 12px;
-  margin: 10px -10px;
+  margin: 5px -10px;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
@@ -51,6 +51,7 @@ input[type="password"] {
 }
 
 .login-button {
+  margin-top: 12px;
   width: 100%;
   padding: 12px;
   background-color: #1a008f;
@@ -82,7 +83,7 @@ input[type="password"] {
 }
 
 .login-button:hover {
-  background-color: #160076;
+  background: #007bff;
 }
 
 .google-button img {
@@ -95,3 +96,21 @@ input[type="password"] {
   font-size: 0.9em;
   color: #555;
 }
+.signup-redirect {
+  margin-top: 20px;
+  font-size: 0.95em;
+  color: #555;
+  text-align: center;
+}
+
+.signup-redirect a {
+  color: #7b1fa2;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.signup-redirect a:hover {
+  text-decoration: underline;
+}
+

@@ -1,35 +1,20 @@
 /* Reset básico */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: #f4f4f4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
 .cadastro-container {
   width: 100%;
   max-width: 500px;
-  padding: 5px;
+  padding: 10px;
 }
 
 .cadastro-box {
   background: #fff;
-  padding: 20px;
+  padding: 10px;
   border-radius: 16px;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 .top-image {
-  width: 50%;
+  width: 40%;
   max-height: 140px;
   object-fit: cover;
   margin-bottom: 20px;
@@ -45,7 +30,7 @@ h1 {
 form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
 }
 
 input[type="text"],
@@ -53,10 +38,23 @@ input[type="email"],
 input[type="password"],
 input[type="tel"] {
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #000000;
   border-radius: 8px;
   font-size: 1em;
   transition: border-color 0.3s ease;
+  text-align: center;
+}
+
+.divisorInput {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+#blocoMorador,
+#apartamentoMorador {
+  width: 45%;
+  
 }
 
 input:focus {
@@ -64,12 +62,10 @@ input:focus {
   outline: none;
 }
 
-input:invalid {
-  border-color: #e53935;
-}
 
 .cadastro-button {
-  padding: 10px;
+  margin-top: 2px;
+  padding: 17px;
   background-color: #1a008f;
   color: white;
   border: none;
@@ -110,25 +106,25 @@ input:invalid {
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100vh;
-    align-items: center;
-}
-
-.InfoPredio{
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+}
+.login-redirect {
+  margin-top: 20px;
+  font-size: 0.95em;
+  color: #555;
+  text-align: center;
 }
 
-.InfoPredio input {
-    width: 45%;
-    
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
- 
+.login-redirect a {
+  color: #7b1fa2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.login-redirect a:hover {
+  text-decoration: underline;
 }

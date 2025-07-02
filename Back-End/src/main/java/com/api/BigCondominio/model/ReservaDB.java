@@ -12,7 +12,7 @@ public class ReservaDB {
     private Long id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "morador_id")
+    @JoinColumn(name = "morador_id", nullable = false)
     private moradorDB morador;
 
     @ManyToOne(optional = false)

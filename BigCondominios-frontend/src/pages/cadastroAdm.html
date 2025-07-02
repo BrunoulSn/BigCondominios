@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cadastrar Administrador</title>
+
+  <link rel="stylesheet" href="/public/styles/cadastroAdm.css">
+  <link rel="stylesheet" href="/public/styles/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <header id="navbar"></header>
+
+  <script>
+    fetch('/src/pages/navbar.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('navbar').innerHTML = data);
+  </script>
+
+  <div class="cadastro-container">
+    <div class="cadastro-box">
+      <img src="/assets/logoApp.png" alt="Logo">
+      <h2>Cadastrar Administrador</h2>
+      <form id="formCadastroAdm">
+        <input type="text" id="nome" placeholder="Nome" required>
+        <input type="email" id="email" placeholder="E-mail" required>
+        <input type="password" id="senha" placeholder="Senha" required>
+        <button type="submit">Cadastrar</button>
+      </form>
+      <div class="mensagem" id="mensagem"></div>
+      <div class="erro" id="erro"></div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('formCadastroAdm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const nome = document.getElementById('nome').value;
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+
+      if (nome && email && senha) {
+        // Recupera admins já cadastrados ou cria array vazio
+        let admins = JSON.parse(localStorage.getItem('admins')) || [];
+        // Adiciona novo admin
+        admins.push({ nome, email, senha });
+        // Salva no localStorage
+        localStorage.setItem('admins', JSON.stringify(admins));
+
+        document.getElementById('mensagem').textContent = "Administrador cadastrado com sucesso!";
+        document.getElementById('erro').textContent = "";
+        document.getElementById('formCadastroAdm').reset();
+      } else {
+        document.getElementById('erro').textContent = "Preencha todos os campos.";
+        document.getElementById('mensagem').textContent = "";
+      }
+    });
+  </script>
+  <script src="/src/controllers/navbar.js"></script>
+</body>
+
+</html>

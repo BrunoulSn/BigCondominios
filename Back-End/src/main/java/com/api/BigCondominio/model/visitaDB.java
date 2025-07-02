@@ -18,7 +18,7 @@ public class visitaDB {
     private String documento;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "morador_id")
+    @JoinColumn(name = "morador_id", nullable = false)
     private moradorDB moradorResponsavel;
 
     @Column

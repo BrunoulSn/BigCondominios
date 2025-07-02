@@ -5,45 +5,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BIGCONDOMÍNIOS - Cadastro</title>
-    <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/cadastroStyle.css" />
+    <link rel="stylesheet" href="/public/styles/cadastroStyle.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/index.css">
-
+    <link rel="stylesheet" href="/public/styles/index.css">
+    <script>
+        window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 
 <body>
     <div class="content">
         <header id="navbar"></header>
         <script>
-            fetch('/BigCondominios-frontend/src/pages/navbar.html')
+            fetch('/src/pages/navbar.html')
                 .then(response => response.text())
                 .then(data => document.getElementById('navbar').innerHTML = data);
         </script>
 
         <div class="cadastro-container">
             <div class="cadastro-box">
-                <img src="/BigCondominios-frontend/assets/logoApp.png" alt="Imagem de Prédio" class="top-image" />
+                <img src="/assets/logoApp.png" alt="Imagem de Prédio" class="top-image" />
                 <h1>Cadastro</h1>
                 <form onsubmit="return cadastrarMorador(event)">
                     <input type="text" id="nomeMorador" placeholder="Nome completo" required />
-                    <input type="text" id="cpfMorador" placeholder="CPF" required />
+                    <input type="text" id="cpfMorador" placeholder="CPF" />
                     <input type="email" id="email" placeholder="E-mail" required />
-                    <input type="text" id="senha" placeholder="Senha" required />
-                    <div class="InfoPredio">
+                    <input type="password" id="senha" placeholder="Senha" />
+                    <div class="divisorInput">
                         <input type="text" id="apartamentoMorador" placeholder="Apartamento" required />
                         <input type="text" id="blocoMorador" placeholder="Bloco" required />
                     </div>
                     <input type="tel" id="telefone" placeholder="Telefone" required />
 
-                    <button type="submit" class="cadastro-button">Cadastrar</button>
+                    <button type="submit" class="cadastro-button" id="btnConfirmar" onclick>Confirmar</button>
+                    <div class="signup-redirect"
+                        style="margin-top: 20px; font-size: 0.95em; color: #555; text-align: center;">
+                        Já tem conta?
+                        <a href="/src/pages/login.html"
+                            style="color: #7b1fa2; text-decoration: none; font-weight: 600;">Faça login aqui</a>
+
                 </form>
-                <p class="login-redirect">Já possui conta? <a href="login.html">Acesse aqui</a></p>
             </div>
         </div>
     </div>
 
-    <script src="/BigCondominios-frontend/src/controllers/cadastro.js"></script>
-    <script src="/BigCondominios-frontend/src/controllers/navbar.js"></script>
+    <script src="/src/controllers/cadastro.js"></script>
+    <script src="/src/controllers/navbar.js"></script>
 </body>
 
 </html>

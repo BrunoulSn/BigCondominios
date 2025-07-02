@@ -1,7 +1,18 @@
 document.addEventListener("DOMContentLoaded", listarMoradores);
 
+const username = "admin";
+const password = "123456";
+const basicAuth = btoa(`${username}:${password}`);
+
 function listarMoradores() {
-  fetch("http://localhost:8080/morador")
+  fetch("https://back-endbigcondominios-production.up.railway.app/morador",{
+
+        method: "GET",
+        headers: {
+            "Authorization": `Basic ${basicAuth}`
+        }
+    })
+
     .then(res => res.json())
     .then(moradores => {
       const tbody = document.getElementById("corpoTabelaMoradores");
@@ -10,21 +21,60 @@ function listarMoradores() {
       moradores.forEach(m => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-              <td>${m.id}</td>
-              <td>${m.nome}</td>
-              <td>${m.bloco}</td>
-              <td>${m.apartamento}</td>
-              <td>${m.telefone}</td>
-            `;
+  <td id="idMorador">${m.id}</td>
+  <td>${m.nome}</td>
+  <td>${m.bloco}</td>
+  <td>${m.apartamento}</td>
+  <td>${m.telefone}</td>
+  <td>
+    <div class="acaoGestao">
+      <i class="fa-solid fa-pen engrenagem"></i>
+      <i class="fa-solid fa-trash lixo"></i>
+    </div>
+  </td>
+`;
+
         tbody.appendChild(tr);
       });
     });
 }
 
-function cancelarMorador(id) {
-  if (!confirm("Deseja cancelar o cadastro?")) return;
+document.addEventListener('click', function (event) {
+  if (event.target.classList.contains('lixo')) {
+    const linha = event.target.closest('tr'); // pega a linha inteira
+    
+    
+    if (confirm(`Deseja excluir o morador com ID ${id}?`)) {
+      excluirMorador(id);
+    }
+  }
+});
 
-  fetch(`http://localhost:8080/api/moradores/${id}/cancelar`, {
-    method: "POST"
-  }).then(() => listarReservas());
+function excluirMorador(id) {
+  fetch("https://back-endbigcondominios-production.up.railway.app/morador/"+id, {
+
+    method: "DELETE",
+    headers: {
+      "Authorization": `Basic ${basicAuth}`
+    }
+    
+  })
+  .then(() => {
+    alert("Morador excluído com sucesso!");
+    listarMoradores(); // Atualiza a lista de moradores
+  })
+  .catch(error => {
+    alert("Erro ao excluir morador: " + error.message);
+  });
 }
+
+document.addEventListener('click', function (event) {
+  if (event.target.classList.contains('engrenagem')) {
+    const linha = event.target.closest('tr');
+    const id = linha.querySelector('td').innerText;
+    // Redireciona para a página de cadastro com o ID na URL
+    window.location.href = `/src/pages/atualizarMorador.html?id=${id}`;
+  }
+});
+
+

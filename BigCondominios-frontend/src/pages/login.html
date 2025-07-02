@@ -5,34 +5,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>BIGCONDOMÍNIOS - LOGIN</title>
-     <link rel="stylesheet" href="/BigCondominios-frontend/public/styles/loginStyle.CSS" />
+     <link rel="stylesheet" href="/public/styles/loginStyle.CSS" />
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+     <script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 
 </head>
 <body>
     <div class="login-container">
         <div class="login-box">
-            <img src="/BigCondominios-frontend/assets/logoApp.png" alt="Imagem de Prédio" class="top-image" />
+            <img src="/assets/logoApp.png" alt="Imagem de Prédio" class="top-image" />
             <h1>BIGCONDOMÍNIOS</h1>
          <form onsubmit="return redirecionar(event)">
-            <input type="email" placeholder="Digite seu email" required />
-            <input type="password" placeholder="Digite sua senha" required />
-            <a href="#" class="forgot-password">Esqueceu sua senha?</a>
-            <button type="submit" class="login-button">Acessar</button>
-         </form>
-            <p class= "signup-text">Ainda não possui conta? <a href="cadastro.html">Cadastre-se</a></p>
+    <input type="text" placeholder="Digite seu Usuario" required id="usuario"/>
+    <input type="password" placeholder="Digite sua senha" required id="senha"/>
+    <button type="submit" class="login-button">Acessar</button>
+</form>
+
+<!-- Botão/Link para cadastro -->
+<div class="signup-redirect">
+    Ainda não tem conta? 
+    <a href="/src/pages/cadastro.html">Cadastre-se aqui</a>
+</div>
+
         </div>
     </div>
 
-
-    <script>
-    function redirecionar(event) {
-        event.preventDefault(); // impede o envio padrão
-        // Aqui você pode validar os dados ou simular login
-        window.location.href = "index.html"; // redireciona
-        return false;
-    }
-    </script>
-
 </body>
+<script src="/src/controllers/loginController.js"></script>
 </html>
